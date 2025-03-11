@@ -1,24 +1,24 @@
-version: "3.9"
-
 services:
   database:
-    image: mysql:9.2.0-oracle
+    image: postgres:17.4
     working_dir: /database
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - databaseVolume:/var/lib/mysql
     ports:
       - "3306:3306"
 
   backend:
-    image: book-store-back:latest
-    build: ./store-backend
-    working_dir: /store-backend
+    image: backend:latest
+    build: ./backend
+    working_dir: /backend
     environment:
       DB_URL:
       DB_USER:
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_PASSWORD: ${DATABASE_PASSWORD}
     ports: 
       - "8080:8080"
     depends_on:
