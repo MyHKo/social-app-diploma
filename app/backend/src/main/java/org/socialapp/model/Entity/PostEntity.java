@@ -16,7 +16,7 @@ public class PostEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id" , nullable = false)
-    private UserEntity user_id;
+    private UserEntity user;
 
     @Column(nullable = false)
     @NotBlank(message = "Title cannot be empty")
@@ -34,7 +34,7 @@ public class PostEntity {
     public PostEntity() {}
 
     public PostEntity(UserEntity user_id, String title, String body, OffsetDateTime created_at) {
-        this.user_id = user_id;
+        this.user = user_id;
         this.title = title;
         this.body = body;
         this.created_at = created_at;
@@ -43,8 +43,8 @@ public class PostEntity {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public UserEntity getUser_id() { return user_id; }
-    public void setUser_id(UserEntity user_id) { this.user_id = user_id; }
+    public UserEntity getUser_id() { return user; }
+    public void setUser_id(UserEntity user_id) { this.user = user_id; }
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }

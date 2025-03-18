@@ -46,7 +46,7 @@ INSERT INTO subscriptions (subscriber_id, subscribee_id, created_at) VALUES
 (1, 2, CURRENT_TIMESTAMP),
 (3, 1, CURRENT_TIMESTAMP);
 
-INSERT INTO posts (user_id, header, body, created_at) VALUES
+INSERT INTO posts (user_id, title, body, created_at) VALUES
 (3, 'My First Post', 'This is the body of my first post.', CURRENT_TIMESTAMP),
 (3, 'My Second Post', 'This is the body of my second post.', CURRENT_TIMESTAMP);
 

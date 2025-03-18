@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
-    List<PostEntity> findAllByUser_id(UserEntity user);
+    List<PostEntity> findAllByUser(UserEntity user);
 
 }

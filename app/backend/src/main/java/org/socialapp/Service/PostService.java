@@ -15,7 +15,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public List<PostEntity> getPostsByUser(UserEntity user) {
-        return postRepository.findAllByUser_id(user);
+        return postRepository.findAllByUser(user);
     }
 
     public PostEntity createPost(PostEntity post) {
