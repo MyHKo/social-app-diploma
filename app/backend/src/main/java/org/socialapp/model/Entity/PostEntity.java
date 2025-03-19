@@ -33,8 +33,8 @@ public class PostEntity {
 
     public PostEntity() {}
 
-    public PostEntity(UserEntity user_id, String title, String body, OffsetDateTime created_at) {
-        this.user = user_id;
+    public PostEntity(UserEntity user, String title, String body, OffsetDateTime created_at) {
+        this.user = user;
         this.title = title;
         this.body = body;
         this.created_at = created_at;

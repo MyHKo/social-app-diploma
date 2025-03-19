@@ -18,6 +18,8 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
     private UserService userService;
 
     @GetMapping
@@ -25,8 +27,9 @@ public class PostController {
         return new String("You cannot check all of the posts");
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/{id}")
     public List<PostEntity> getPostsByUser_id(@PathVariable String id) {
+        System.out.println(id);
         UserEntity user = userService.getUserByEmail(id);
         return postService.getPostsByUser(user);
     }
