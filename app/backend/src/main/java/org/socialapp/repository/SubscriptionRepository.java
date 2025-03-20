@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface SubscriptionRepository extends JpaRepository<SubscriptionEntity, Long> {
 
-    List<SubscriptionEntity> findBySubscriber(UserEntity subscriber);
+    List<SubscriptionEntity> findAllBySubscriber(UserEntity subscriber);
 
-    List<SubscriptionEntity> findBySubscribee(UserEntity subscribee);
+    List<SubscriptionEntity> findAllBySubscribee(UserEntity subscribee);
 
 }
