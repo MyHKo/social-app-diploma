@@ -26,11 +26,6 @@ public class UserEntity {
     private String surname;
 
     @Column(nullable = false)
-    @NotBlank(message = "Email cannot be empty")
-    @Email(message = "Invalid email format")
-    private String email;
-
-    @Column(nullable = false)
     @NotBlank(message = "Username cannot be empty")
     @Pattern(regexp = "^[A-Za-z0-9_]{3,10}$\n",
             message = "Username contains illegal characters")
@@ -47,7 +42,6 @@ public class UserEntity {
     public UserEntity(String name, String surname, String email, String username, String password) {
         this.name = name;
         this.surname = surname;
-        this.email = email;
         this.username = username;
         this.password = password;
     }
@@ -60,9 +54,6 @@ public class UserEntity {
     public String getSurname() { return surname; }
     public void setSurname(String surname) { this.surname = surname; }
     
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
