@@ -1,0 +1,58 @@
+.feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.postCreator {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.timestamp {
+  color: #999;
+}
+
+.postContent {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.postActions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.icon:hover {
+  color: #000;
+}
