@@ -1,7 +1,8 @@
 @use '@styles/_reset' as *;
 
 :root {
-  --main-color-background: #f5f5f5;
-  --main-color-button: #007bff;
-  --main-color-button-hover: #0056b3;
+  --background: #f5f5f5;
+  --disabled: #ccc;
+  --main-color-blue: #007bff;
+  --button-hover: #0056b3;
 }

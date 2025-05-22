@@ -1,6 +1,6 @@
 .button {
   padding: 10px 20px;
-  background-color: var(--main-color-button);
+  background-color: var(--main-color-blue);
   color: white;
   border: none;
   border-radius: 6px;
@@ -9,11 +9,11 @@
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: var(--main-color-button-hover);
+    background-color: var(--button-hover);
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--disabled);
     cursor: not-allowed;
   }
 }
