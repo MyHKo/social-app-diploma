@@ -1,12 +1,13 @@
-import styles from './home.module.scss'
 import Sidebar from './Sidebar/Sidebar.jsx'
+import Feed from './Feed/Feed.jsx'
+import styles from './home.module.scss'
 
 function Home() {
 
     return (
     <main className={styles.content}>
         <Sidebar />
-        <section className={styles.feed}></section>
+        <Feed />
     </main>
     )
 }
