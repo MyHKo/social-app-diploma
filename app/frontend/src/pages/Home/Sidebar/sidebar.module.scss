@@ -1,0 +1,34 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-section {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-text {
+  font-weight: 600;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.trending-list {
+  list-style: disc inside;
+  padding-left: 0;
+  font-size: 14px;
+}
