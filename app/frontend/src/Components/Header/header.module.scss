@@ -10,6 +10,8 @@
 .siteTitle {
   font-size: 24px;
   font-weight: bold;
+  user-select: none;
+  cursor: pointer;
 }
 
 .loginButtonWrapper {
