@@ -1,15 +1,11 @@
-import Button from '@components/UiKit/Button/Button.jsx'
-import Textarea from '@components/UiKit/Textarea/Textarea.jsx'
+import PostCreator from '@components/PostCreator/PostCreator.jsx'
 import { Heart, MessageCircle } from 'lucide-react'
 import styles from './feed.module.scss'
 
 function Feed() {
     return (
         <section className={styles.feed}>
-            <div className={styles.postCreator}>
-                <Textarea placeholder="What's on your mind?" value={""}/>
-                <Button text={"Post"} />
-            </div>
+            <PostCreator />
 
             {[1, 2, 3].map((id) => (
                 <div className={styles.post} key={id}>
