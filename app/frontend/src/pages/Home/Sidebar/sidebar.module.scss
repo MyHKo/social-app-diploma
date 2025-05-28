@@ -4,7 +4,7 @@
   gap: 16px;
 }
 
-.sidebar_section {
+.sidebar_section{
   background-color: white;
   padding: 16px;
   border-radius: 8px;
@@ -19,6 +19,12 @@
 
 .profile_text {
   font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    color: var(--button-hover);
+  }
 }
 
 .section_title {
@@ -31,4 +37,13 @@
   list-style: disc inside;
   padding-left: 0;
   font-size: 14px;
+}
+
+li {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: var(--button-hover);
+  }
 }
