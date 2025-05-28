@@ -1,5 +1,5 @@
-import styles from '/src/Components/UiKit/Textarea/textarea.module.scss'
-import PropTypes from "prop-types";
+import styles from './textarea.module.scss'
+import PropTypes from 'prop-types'
 
  function Textarea({ value, placeholder }) {
     return <textarea className={styles.textarea} value={value} placeholder={placeholder} />;
