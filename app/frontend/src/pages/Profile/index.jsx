@@ -1,5 +1,6 @@
 import Post from '@components/Post/index.jsx'
 import ProfileHeader from '@pages/Profile/ProfileHeader/index.jsx'
+import Stats from '@pages/Profile/Stats/index.jsx'
 import styles from './profile.module.scss'
 
 function Profile() {
@@ -8,20 +9,7 @@ function Profile() {
             <div className={styles.profile_info_container}>
                 <ProfileHeader username={"username"} />
 
-                <div className={styles.stats}>
-                    <div>
-                        <p className={styles.stat_number}>34</p>
-                        <p className={styles.stat_label}>Posts</p>
-                    </div>
-                    <div>
-                        <p className={styles.stat_number}>128</p>
-                        <p className={styles.stat_label}>Followers</p>
-                    </div>
-                    <div>
-                        <p className={styles.stat_number}>97</p>
-                        <p className={styles.stat_label}>Following</p>
-                    </div>
-                </div>
+                <Stats username={"username"}/>
             </div>
 
             <div className={styles.posts_section}>

@@ -1,0 +1,15 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.stat_number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat_label {
+  color: #6b7280;
+}
