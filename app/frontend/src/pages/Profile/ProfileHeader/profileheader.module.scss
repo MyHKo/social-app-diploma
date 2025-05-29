@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: (var(--avatar-background));
+}
+
+.username {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.bio {
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
