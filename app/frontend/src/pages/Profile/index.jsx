@@ -1,17 +1,12 @@
+import Post from '@components/Post/index.jsx'
+import ProfileHeader from '@pages/Profile/ProfileHeader/index.jsx'
 import styles from './profile.module.scss'
-import Post from "@components/Post/index.jsx";
 
 function Profile() {
     return(
         <div className={styles.profile_container}>
             <div className={styles.profile_info_container}>
-                <div className={styles.header}>
-                    <div className={styles.avatar}></div>
-                    <div>
-                        <h2 className={styles.username}>@username</h2>
-                        <p className={styles.bio}>Lover of tech, cats & coffee ☕</p>
-                    </div>
-                </div>
+                <ProfileHeader username={"username"} />
 
                 <div className={styles.stats}>
                     <div>
