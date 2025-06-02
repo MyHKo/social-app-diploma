@@ -1,9 +1,13 @@
 @use '@styles/_reset' as *;
 
 :root {
-  --background: #f5f5f5;
+  --background: #f0f2f5;
   --disabled: #ccc;
   --avatar-background: #ccc;
-  --main-color-blue: #007bff;
-  --button-hover: #0056b3;
+  --main-color: #4B0082;
+  --button-hover: #360061;
+  --input-focus: #4B0082;
+  --input-border: #aaa;
+  --text-color: #222;
+  --border-radius: 8px;
 }
