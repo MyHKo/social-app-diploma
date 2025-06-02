@@ -23,7 +23,7 @@
   transition: 0.2s ease;
 
   &:hover {
-    color: var(--button-hover);
+    color: var(--main-color);
   }
 }
 
@@ -44,6 +44,6 @@ li {
   user-select: none;
 
   &:hover {
-    color: var(--button-hover);
+    color: var(--main-color);
   }
 }
