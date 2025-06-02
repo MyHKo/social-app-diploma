@@ -10,7 +10,7 @@ function Header() {
         <header className={styles.header}>
             <h1 className={styles.siteTitle} onClick={() => {navigate(routes.home)}}>SocialSphere</h1>
             <div className={styles.loginButtonWrapper}>
-                <Button text={"Log In"} />
+                <Button text={"Log In"} onClick={() => {navigate(routes.login)}}/>
             </div>
         </header>
     );
