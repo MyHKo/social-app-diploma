@@ -8,7 +8,9 @@ function Header() {
 
     return (
         <header className={styles.header}>
-            <h1 className={styles.siteTitle} onClick={() => {navigate(routes.home)}}>SocialSphere</h1>
+            <h1 className={styles.siteTitle} onClick={() => {navigate(routes.home)}}>
+                Social<span>Sphere</span>
+            </h1>
             <div className={styles.loginButtonWrapper}>
                 <Button text={"Log In"} onClick={() => {navigate(routes.login)}}/>
             </div>

@@ -8,10 +8,15 @@
 }
 
 .siteTitle {
+  font-family: sans-serif;
   font-size: 24px;
   font-weight: bold;
   user-select: none;
   cursor: pointer;
+
+  span {
+    color: var(--main-color);
+  }
 }
 
 .loginButtonWrapper {
