@@ -31,7 +31,7 @@ public class SecurityConf {
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/posts/get-all", "/auth/login").permitAll()
-                        .requestMatchers("/posts/add-post", "/posts/delete-post").hasRole("ADMIN")
+                        .requestMatchers("/posts/add-post", "/posts/delete-post").hasRole("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
