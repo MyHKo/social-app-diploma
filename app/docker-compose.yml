@@ -17,9 +17,13 @@ services:
     build: ./backend
     working_dir: /backend
     environment:
-      DB_URL:
-      DB_USER:
+      DB_URL: ${DATABASE_URL}
+      DB_USER: ${DATABASE_USER}
       DB_PASSWORD: ${DATABASE_PASSWORD}
+      KEYSTORE_PASSWORD: ${KEYSTORE_PASSWORD}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+    volumes:
+      - social-app-keys:/keystore
     ports: 
       - "8080:8080"
     depends_on:
@@ -27,3 +31,4 @@ services:
 
 volumes:
   databaseVolume:
+  social-app-keys:

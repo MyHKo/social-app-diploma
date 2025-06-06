@@ -7,22 +7,22 @@ import java.util.Objects;
 
 @Embeddable
 public class SubscriptionId implements Serializable {
-    private String subscriberId;
+    private Integer subscriberId;
 
-    private String subscribeeId;
+    private Integer subscribeeId;
 
     public SubscriptionId() {}
 
-    public SubscriptionId(String subscriberId, String subscribeeId) {
+    public SubscriptionId(Integer subscriberId, Integer subscribeeId) {
         this.subscriberId = subscriberId;
         this.subscribeeId = subscribeeId;
     }
 
-    public String getSubscriberId() { return subscriberId; }
-    public void setSubscriberId(String subscriberId) { this.subscriberId = subscriberId; }
+    public Integer getSubscriberId() { return subscriberId; }
+    public void setSubscriberId(Integer subscriberId) { this.subscriberId = subscriberId; }
 
-    public String getSubscribeeId() { return subscribeeId; }
-    public void setSubscribeeId(String subscribeeId) { this.subscribeeId = subscribeeId; }
+    public Integer getSubscribeeId() { return subscribeeId; }
+    public void setSubscribeeId(Integer subscribeeId) { this.subscribeeId = subscribeeId; }
 
     @Override
     public boolean equals(Object o) {

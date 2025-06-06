@@ -26,9 +26,9 @@ public class PostEntity {
     @NotBlank(message = "Body cannot be empty")
     private String body;
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     @NotBlank(message = "Date cannot be empty")
-    private OffsetDateTime created_at;
+    private OffsetDateTime createdAt;
 
 
     public PostEntity() {}
@@ -37,11 +37,10 @@ public class PostEntity {
         this.user = user;
         this.title = title;
         this.body = body;
-        this.created_at = created_at;
+        this.createdAt = created_at;
     }
 
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
     public UserEntity getUser_id() { return user; }
     public void setUser_id(UserEntity user_id) { this.user = user_id; }
@@ -52,6 +51,5 @@ public class PostEntity {
     public String getBody() { return body; }
     public void setBody(String body) { this.body = body; }
 
-    public OffsetDateTime getCreated_at() { return created_at; }
-    public void setCreated_at(OffsetDateTime created_at) { this.created_at = created_at; }
+    public OffsetDateTime getCreated_at() { return createdAt; }
 }

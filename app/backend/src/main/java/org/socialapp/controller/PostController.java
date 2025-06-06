@@ -22,15 +22,15 @@ public class PostController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String allPosts() {
-        return new String("You cannot check all of the posts");
-    }
-
     @GetMapping("/{id}")
     public List<PostEntity> getPostsByUser_id(@PathVariable String id) {
         System.out.println(id);
-        UserEntity user = userService.getUserByEmail(id);
+        UserEntity user = userService.getUserByUsername(id);
         return postService.getPostsByUser(user);
+    }
+
+    @GetMapping("/get-newest")
+    public List<PostEntity> getNewestPosts() {
+        return postService.getTenNewestPosts();
     }
 }

@@ -27,14 +27,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public UserEntity getUserById(@PathVariable("id") String id) {
-        return userService.getUserByEmail(id);
+    @GetMapping("/{username}")
+    public UserEntity getUserById(@PathVariable("username") String username) {
+        return userService.getUserByUsername(username);
     }
 
-    @GetMapping("/{id}/subscriptions")
-    public List<SubscriptionEntity> getUserSubscriptions(@PathVariable("id") String id) {
-        UserEntity user = userService.getUserByEmail(id);
+    @GetMapping("/{username}/subscriptions")
+    public List<SubscriptionEntity> getUserSubscriptions(@PathVariable("username") String username) {
+        UserEntity user = userService.getUserByUsername(username);
         return subscriptionService.getAllSubscriptions(user);
     }
 }
