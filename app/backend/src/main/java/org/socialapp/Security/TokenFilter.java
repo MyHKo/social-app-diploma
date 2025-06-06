@@ -28,13 +28,12 @@ public class TokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
 
-        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-all");
+        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest");
 
         if (publicEndpoints.contains(request.getRequestURI())) {
             chain.doFilter(request, response);
             return;
         }
-
 
         final String authHeader = request.getHeader("Authorization");
 

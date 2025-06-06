@@ -30,7 +30,7 @@ public class PostService {
     }
 
     public List<PostEntity> getTenNewestPosts() {
-        Pageable topTen = PageRequest.of(0, 10, Sort.by("created_at").descending());
+        Pageable topTen = PageRequest.of(0, 10, Sort.by("createdAt").descending());
         return postRepository.findAllByOrderByCreatedAtDesc(topTen).getContent();
     }
 }
