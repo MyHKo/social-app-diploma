@@ -1,4 +1,4 @@
-import styles from './PostCreator.module.scss';
+import styles from './postCreator.module.scss';
 import Textarea from '@components/UiKit/Textarea/Textarea.jsx'
 import Button from '@components/UiKit/Button/Button.jsx'
 
