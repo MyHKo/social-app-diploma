@@ -14,7 +14,7 @@ function Post({ key, user, text, time }) {
         <div className={styles.post} key={key}>
             <div className={styles.post_header}>
                 <span className={styles.username}>@{user}</span>
-                <span className={styles.timestamp}>{time}h ago</span>
+                <span className={styles.timestamp}>{time} ago</span>
             </div>
             <p className={styles.post_content}>
                 {text}
