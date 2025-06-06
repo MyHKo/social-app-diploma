@@ -4,6 +4,12 @@
   gap: 1.5rem;
 }
 
+.name_row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .avatar {
   width: 96px;
   height: 96px;
@@ -11,12 +17,21 @@
   background-color: (var(--avatar-background));
 }
 
-.username {
+.name {
   font-size: 1.75rem;
   font-weight: 600;
 }
 
+.username {
+  margin-top: 0.25rem;
+}
+
 .bio {
   color: #6b7280;
-  margin-top: 0.25rem;
+  margin-top: 1rem;
+}
+
+.follow_button {
+  display: inline-block;
+  margin-left: 0.75rem;
 }
