@@ -17,6 +17,12 @@
 
 .username {
   font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--button-hover);
+  }
 }
 
 .timestamp {
