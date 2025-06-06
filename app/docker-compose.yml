@@ -12,8 +12,15 @@ services:
     ports:
       - "5432:5432"
 
+  frontend:
+    image: social-app-fronted:latest
+    build: ./frontend
+    working_dir: /frontend
+    ports:
+      - "3000:80"
+
   backend:
-    image: backend:latest
+    image: social-app-backend:latest
     build: ./backend
     working_dir: /backend
     environment:
