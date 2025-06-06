@@ -36,10 +36,10 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 
 
-INSERT INTO users (name, surname, email, username, password) VALUES
-('Alice', 'Smith', 'alice@example.com', 'alice_the_best', 'hashed_password_1'),
-('Bob', 'Johnson', 'bob@example.com', 'bobius', 'hashed_password_2'),
-('Charlie', 'Brown', 'charlie@example.com', 'charlie22', 'hashed_password_3');
+INSERT INTO users (name, surname, username, password) VALUES
+('Alice', 'Smith', 'alice_the_best', 'hashed_password_1'),
+('Bob', 'Johnson', 'bobius', 'hashed_password_2'),
+('Charlie', 'Brown', 'charlie22', 'hashed_password_3');
 
 
 INSERT INTO subscriptions (subscriber_id, subscribee_id, created_at) VALUES
