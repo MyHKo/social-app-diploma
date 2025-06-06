@@ -4,17 +4,22 @@
   gap: 1.5rem;
 }
 
-.name_row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
 
 .avatar {
   width: 96px;
   height: 96px;
   border-radius: 50%;
   background-color: (var(--avatar-background));
+}
+
+.info {
+  width: 100%;
+}
+
+.name_row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .name {
@@ -34,4 +39,5 @@
 .follow_button {
   display: inline-block;
   margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }

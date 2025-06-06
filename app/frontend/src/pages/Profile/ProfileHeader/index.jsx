@@ -6,7 +6,7 @@ function ProfileHeader({ username, avatar }) {
     return (
         <div className={styles.header}>
             <div className={styles.avatar}>{avatar}</div>
-            <div>
+            <div className={styles.info}>
                 <div className={styles.name_row}>
                     <h2 className={styles.name}>John Doe</h2>
                     <Button style={styles.follow_button} text="Follow"/>
