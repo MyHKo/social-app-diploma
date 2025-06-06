@@ -4,7 +4,7 @@ const usePostStore = create((set) => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:8080/posts");
+            const response = await fetch("http://localhost:8080/posts/get-newest");
             const data = await response.json();
             set({posts: data})
         }
