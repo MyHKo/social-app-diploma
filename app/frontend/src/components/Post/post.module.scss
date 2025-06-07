@@ -40,36 +40,46 @@
   align-items: center;
 }
 
-.icon {
-  cursor: pointer;
+.number_of_interactions {
   color: #666;
-  transition: color 0.2s;
+}
 
-  &:hover {
-    color: #000;
+.comment_icon_container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+
+  .comment_icon {
+    color: #666;
+    transition: color 0.2s;
+  }
+
+  &:hover * {
+    color: var(--button-hover);
   }
 }
 
-.heart_container {
+.heart_icon_container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
   cursor: pointer;
-}
 
-.heart_icon {
-  color: #666;
-  fill: white;
-  transition: color 0.2s, fill 0.2s;
-
-  &.liked {
-    fill: red;
-    color: red;
-    animation: heartbeat 0.6s ease-in-out;
+  &:hover .heart_icon,
+  &:hover .number_of_interactions{
+    color: var(--button-hover);
   }
 
-  &:hover {
-    color: #000;
+  .heart_icon {
+    color: #666;
+    fill: white;
+    transition: color 0.2s, fill 0.2s;
 
     &.liked {
+      fill: red;
       color: red;
+      animation: heartbeat 0.6s ease-in-out;
     }
   }
 }
