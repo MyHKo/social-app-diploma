@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -14,15 +15,15 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<CommentEntity> getPostsByUser(PostEntity post) {
+    public List<CommentEntity> getCommentsByPost(Optional<PostEntity> post) {
         return commentRepository.findAllByPost(post);
     }
 
-    public CommentEntity createPost(CommentEntity comment) {
+    public CommentEntity createComment(CommentEntity comment) {
         return commentRepository.save(comment);
     }
 
-    public void deletePost(CommentEntity comment) {
+    public void deleteComment(CommentEntity comment) {
         commentRepository.delete(comment);
     }
 }
