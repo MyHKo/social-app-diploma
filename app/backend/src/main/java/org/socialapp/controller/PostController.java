@@ -41,12 +41,12 @@ public class PostController {
         return postService.getPostsByUser(user);
     }
 
-    @GetMapping("/stats-{id}")
-    public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable String id) {
+    @GetMapping("/stats/{id}")
+    public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable("id") String id) {
         Map<String,Object> response = new HashMap<>();
-        Optional<PostEntity> post = postService.getPostById(Long.getLong(id));
-        int numberOfLikes = likeService.getLikesByPostId(post).size();
-        int numberOfComments = commentService.getCommentsByPost(post).size();
+        Optional<PostEntity> post = postService.getPostById(Long.parseLong(id));
+        int numberOfLikes = likeService.getLikesByPostId(post.get().getId()).size();
+        int numberOfComments = commentService.getCommentsByPost(post.get()).size();
         response.put("numberOfLikes", numberOfLikes);
         response.put("numberOfComments", numberOfComments);
 

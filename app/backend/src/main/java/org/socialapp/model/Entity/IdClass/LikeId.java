@@ -9,20 +9,20 @@ import java.util.Objects;
 public class LikeId implements Serializable {
     private Integer userId;
 
-    private Integer PostId;
+    private Integer postId;
 
     public LikeId() {}
 
     public LikeId(Integer userId, Integer PostId) {
         this.userId = userId;
-        this.PostId = PostId;
+        this.postId = PostId;
     }
 
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
 
-    public Integer getPostId() { return PostId; }
-    public void setPostId(Integer PostId) { this.PostId = PostId; }
+    public Integer getPostId() { return postId; }
+    public void setPostId(Integer PostId) { this.postId = PostId; }
 
     @Override
     public boolean equals(Object o) {
@@ -30,11 +30,11 @@ public class LikeId implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         LikeId that = (LikeId) o;
         return Objects.equals(userId, that.userId) &&
-                Objects.equals(PostId, that.PostId);
+                Objects.equals(postId, that.postId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, PostId);
+        return Objects.hash(userId, postId);
     }
 }

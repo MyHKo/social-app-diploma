@@ -25,7 +25,7 @@ function Feed() {
             <PostCreator />
 
             {posts.map((post) => (
-                <Post key={post.id} user={`${post.user_id.username}`} text={post.body} time={calculateTimeDifference(post.created_at)} />
+                <Post key={post.id} postId={post.id} user={`${post.user_id.username}`} text={post.body} time={calculateTimeDifference(post.created_at)} />
             ))}
         </section>
     );

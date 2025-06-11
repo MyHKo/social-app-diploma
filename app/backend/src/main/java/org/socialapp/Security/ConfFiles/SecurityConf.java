@@ -30,7 +30,7 @@ public class SecurityConf {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/posts/get-newest", "/auth/login").permitAll()
+                        .requestMatchers("/posts/get-newest", "/auth/login", "/posts/stats/*").permitAll()
                         .requestMatchers("/posts/add-post", "/posts/delete-post").hasRole("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)

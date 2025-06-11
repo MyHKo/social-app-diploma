@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "comments")
 public class CommentEntity {
 
     @Id

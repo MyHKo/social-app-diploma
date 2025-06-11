@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.*;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
@@ -28,11 +29,14 @@ public class TokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
 
-        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest");
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest", "/posts/stats/*");
 
-        if (publicEndpoints.contains(request.getRequestURI())) {
-            chain.doFilter(request, response);
-            return;
+        for (String pattern : publicEndpoints) {
+            if (pathMatcher.match(pattern, request.getRequestURI())) {
+                chain.doFilter(request, response);
+                return;
+            }
         }
 
         final String authHeader = request.getHeader("Authorization");

@@ -15,7 +15,7 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<CommentEntity> getCommentsByPost(Optional<PostEntity> post) {
+    public List<CommentEntity> getCommentsByPost(PostEntity post) {
         return commentRepository.findAllByPost(post);
     }
 
