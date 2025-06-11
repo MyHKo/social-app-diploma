@@ -18,17 +18,17 @@ public class LikeEntity {
     @ManyToOne
     @MapsId("postId")
     @JoinColumn(name = "post_id", nullable = false)
-    private UserEntity post;
+    private PostEntity post;
 
 
     public LikeEntity() {}
 
-    public LikeEntity(UserEntity user, UserEntity post) {
+    public LikeEntity(UserEntity user, PostEntity post) {
         this.user = user;
         this.post = post;
     }
 
     public UserEntity getUser() { return user; }
 
-    public UserEntity getPost() { return post; }
+    public PostEntity getPost() { return post; }
 }
