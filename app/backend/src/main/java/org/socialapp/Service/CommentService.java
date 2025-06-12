@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -17,6 +16,10 @@ public class CommentService {
 
     public List<CommentEntity> getCommentsByPost(PostEntity post) {
         return commentRepository.findAllByPost(post);
+    }
+
+    public int countCommentsByPost(PostEntity post) {
+        return commentRepository.countAllByPost(post);
     }
 
     public CommentEntity createComment(CommentEntity comment) {

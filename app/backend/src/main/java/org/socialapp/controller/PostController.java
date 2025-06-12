@@ -45,8 +45,8 @@ public class PostController {
     public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable("id") String id) {
         Map<String,Object> response = new HashMap<>();
         Optional<PostEntity> post = postService.getPostById(Long.parseLong(id));
-        int numberOfLikes = likeService.getLikesByPostId(post.get().getId()).size();
-        int numberOfComments = commentService.getCommentsByPost(post.get()).size();
+        int numberOfLikes = likeService.countLikesByPost(post.get());
+        int numberOfComments = commentService.countCommentsByPost(post.get());
         response.put("numberOfLikes", numberOfLikes);
         response.put("numberOfComments", numberOfComments);
 

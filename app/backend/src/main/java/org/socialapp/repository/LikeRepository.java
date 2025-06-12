@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
 
-    List<LikeEntity> findAllByPostId(Long postId);
+    int countAllByPost(PostEntity post);
 
 }

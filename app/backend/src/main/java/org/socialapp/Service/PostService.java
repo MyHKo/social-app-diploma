@@ -18,6 +18,12 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private LikeService likeService;
+
     public List<PostEntity> getPostsByUser(UserEntity user) {
         return postRepository.findAllByUser(user);
     }
@@ -35,7 +41,12 @@ public class PostService {
     }
 
     public List<PostEntity> getTenNewestPosts() {
-        Pageable topTen = PageRequest.of(0, 10);
-        return postRepository.findAllByOrderByCreatedAtDesc(topTen).getContent();
+        Pageable topTenPageable = PageRequest.of(0, 10);
+        List<PostEntity> topTen = postRepository.findAllByOrderByCreatedAtDesc(topTenPageable).getContent();
+        for (PostEntity post : topTen) {
+            post.setNumberOfComments(commentService.countCommentsByPost(post));
+            post.setNumberOfLikes(likeService.countLikesByPost(post));
+        }
+        return topTen;
     }
 }

@@ -1,14 +1,12 @@
 import {Heart, MessageCircle} from 'lucide-react'
 import PropTypes from 'prop-types'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {useNavigate} from 'react-router'
+import routes from '../../router/path.js'
 import styles from './post.module.scss'
-import routes from "../../router/path.js";
 
-function Post({ key, postId, user, title, text, time }) {
+function Post({ key, postId, user, title, number_of_comments, number_of_likes, text, time }) {
     const [isLiked, setIsLiked] = useState(false)
-    const [numberOfComments, setNumberOfComments] = useState(0)
-    const [numberOfLikes, setNumberOfLikes] = useState(0)
     const navigate = useNavigate()
 
     const toggleHeart = () => {
@@ -18,16 +16,6 @@ function Post({ key, postId, user, title, text, time }) {
     const navigateToPostPage = () => {
         navigate(routes.post(postId))
     }
-
-    useEffect(() => {
-        fetch(`http://localhost:8080/posts/stats/${postId}`)
-            .then(response => response.json())
-            .then(data => {
-                setNumberOfLikes(data.numberOfLikes)
-                setNumberOfComments(data.numberOfComments)
-            })
-            .catch(error => console.error('Error fetching post:', error));
-    }, []);
 
     return (
         <div className={styles.post} key={key}>
@@ -42,12 +30,12 @@ function Post({ key, postId, user, title, text, time }) {
             <div className={styles.post_actions}>
                 <div className={styles.heart_icon_container} onClick={toggleHeart}>
                     <Heart className={`${styles.heart_icon} ${isLiked ? styles.liked : ''}`}/>
-                    <span className={styles.number_of_interactions}>{numberOfLikes}</span>
+                    <span className={styles.number_of_interactions}>{number_of_likes}</span>
                 </div>
 
                 <div className={styles.comment_icon_container}>
                     <MessageCircle className={styles.comment_icon}/>
-                    <span className={styles.number_of_interactions}>{numberOfComments}</span>
+                    <span className={styles.number_of_interactions}>{number_of_comments}</span>
                 </div>
         </div>
         </div>
@@ -61,6 +49,8 @@ Post.propTypes = {
     postId: PropTypes.number.isRequired,
     user: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    number_of_comments: PropTypes.number.isRequired,
+    number_of_likes: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
 }
