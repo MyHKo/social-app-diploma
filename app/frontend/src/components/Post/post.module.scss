@@ -34,6 +34,17 @@
   line-height: 1.5;
 }
 
+.post_title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--main-color);
+  }
+}
+
 .post_actions {
   display: flex;
   gap: 16px;

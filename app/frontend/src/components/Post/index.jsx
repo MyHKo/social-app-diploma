@@ -1,15 +1,22 @@
 import {Heart, MessageCircle} from 'lucide-react'
 import PropTypes from 'prop-types'
 import {useEffect, useState} from 'react'
+import {useNavigate} from 'react-router'
 import styles from './post.module.scss'
+import routes from "../../router/path.js";
 
-function Post({ key, postId, user, text, time }) {
+function Post({ key, postId, user, title, text, time }) {
     const [isLiked, setIsLiked] = useState(false)
     const [numberOfComments, setNumberOfComments] = useState(0)
     const [numberOfLikes, setNumberOfLikes] = useState(0)
+    const navigate = useNavigate()
 
     const toggleHeart = () => {
         setIsLiked(!isLiked)
+    }
+
+    const navigateToPostPage = () => {
+        navigate(routes.post(postId))
     }
 
     useEffect(() => {
@@ -28,6 +35,7 @@ function Post({ key, postId, user, text, time }) {
                 <span className={styles.username}>@{user}</span>
                 <span className={styles.timestamp}>{time} ago</span>
             </div>
+            <h2 className={styles.post_title} onClick={navigateToPostPage}>{title}</h2>
             <p className={styles.post_content}>
                 {text}
             </p>
@@ -52,6 +60,7 @@ Post.propTypes = {
     key: PropTypes.number.isRequired,
     postId: PropTypes.number.isRequired,
     user: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
 }
