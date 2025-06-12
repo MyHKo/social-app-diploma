@@ -8,7 +8,7 @@ function UserPosts({ username }) {
             <h3 className={styles.posts_title}>Recent Posts</h3>
             <div className={styles.posts_list}>
                 {[1, 2, 3].map((id) => (
-                    <Post key={id} user={"@user"} text={"This is my first post. Loving this platform"} time={"2"}/>
+                    <Post key={id} user={"@user"} title={"My first post"} text={"This is my first post. Loving this platform"} time={"2"}/>
                 ))}
             </div>
         </div>
