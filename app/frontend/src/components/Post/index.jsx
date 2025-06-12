@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {useEffect, useState} from 'react'
 import styles from './post.module.scss'
 
-function Post({ key, postId, user, text, time}) {
+function Post({ key, postId, user, text, time }) {
     const [isLiked, setIsLiked] = useState(false)
     const [numberOfComments, setNumberOfComments] = useState(0)
     const [numberOfLikes, setNumberOfLikes] = useState(0)
