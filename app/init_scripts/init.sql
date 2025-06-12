@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS comments (
     post_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     body TEXT NOT NULL,
-    creation_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,    
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -58,7 +58,7 @@ INSERT INTO posts (user_id, title, body, created_at) VALUES
 (3, 'My First Post', 'This is the body of my first post.', CURRENT_TIMESTAMP),
 (3, 'My Second Post', 'This is the body of my second post.', CURRENT_TIMESTAMP);
 
-INSERT INTO comments (post_id, user_id, body, creation_timestamp) VALUES
+INSERT INTO comments (post_id, user_id, body, created_at) VALUES
 (1, 1, 'Great post! Really enjoyed reading it.', CURRENT_TIMESTAMP),
 (1, 2, 'I disagree with your point, but interesting take!', CURRENT_TIMESTAMP);
 
