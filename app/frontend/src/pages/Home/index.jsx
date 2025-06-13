@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar/Sidebar.jsx'
+import Sidebar from '@components/Sidebar/Sidebar.jsx'
 import Feed from './Feed/Feed.jsx'
 import styles from './home.module.scss'
 
