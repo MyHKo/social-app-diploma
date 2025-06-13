@@ -30,7 +30,7 @@ public class TokenFilter extends OncePerRequestFilter {
                                     FilterChain chain) throws ServletException, IOException {
 
         AntPathMatcher pathMatcher = new AntPathMatcher();
-        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest", "/posts/comments/*");
+        List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest", "/posts/comments/*", "/posts/stats/*");
 
         for (String pattern : publicEndpoints) {
             if (pathMatcher.match(pattern, request.getRequestURI())) {

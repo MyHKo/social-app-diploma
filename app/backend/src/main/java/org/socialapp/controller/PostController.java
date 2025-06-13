@@ -43,13 +43,27 @@ public class PostController {
     }
 
     @GetMapping("/comments/{id}")
-    public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable("id") String id) {
+    public ResponseEntity<Map<String,Object>> getPostComments(@PathVariable("id") String id) {
         Map<String,Object> response = new HashMap<>();
         Optional<PostEntity> post = postService.getPostById(Long.parseLong(id));
         List<CommentEntity> comments = commentService.getCommentsByPost(post.get());
         response.put("comments", comments);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/stats/{id}")
+    public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable("id") String id) {
+        Map<String,Object> response = new HashMap<>();
+        Optional<PostEntity> optionalPost = postService.getPostById(Long.parseLong(id));
+        
+        if(optionalPost.isPresent()) {
+            response.put("post", optionalPost.get());
+            return ResponseEntity.ok(response);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/get-newest")
