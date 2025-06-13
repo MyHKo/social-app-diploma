@@ -3,15 +3,21 @@ import Post from '@components/Post/index.jsx'
 import {usePostStore} from '@stores/PostStore.js'
 import calculateTimeDifference from '@utils/calculateTimeDifference.js'
 import styles from './feed.module.scss'
+import {useEffect} from "react";
 
 function Feed() {
     const { posts, fetchData}  = usePostStore()
 
-    fetchData()
+    useEffect(() => {
+        fetchData(posts)
+    }, []);
 
     return (
         <section className={styles.feed}>
-            <PostCreator />
+            <div className={styles.post_creator_container}>
+                <PostCreator />
+            </div>
+
 
             {posts.map((post) => (
                 <Post key={post.id} postId={post.id} user={`${post.user_id.username}`} text={post.body}
