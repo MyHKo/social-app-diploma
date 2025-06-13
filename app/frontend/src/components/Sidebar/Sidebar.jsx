@@ -17,9 +17,9 @@ function Sidebar() {
             <div className={styles.sidebar_section}>
                 <span className={styles.section_title}>Trending Topics</span>
                 <ul className={styles.trending_list}>
-                    <li>#Dogs</li>
-                    <li>#Cats</li>
-                    <li>#Computer Science</li>
+                    <li className={styles.trending_item}>#Dogs</li>
+                    <li className={styles.trending_item}>#Cats</li>
+                    <li className={styles.trending_item}>#Computer Science</li>
                 </ul>
             </div>
         </aside>
