@@ -4,6 +4,7 @@ import org.socialapp.Service.CommentService;
 import org.socialapp.Service.LikeService;
 import org.socialapp.Service.PostService;
 import org.socialapp.Service.UserService;
+import org.socialapp.model.Entity.CommentEntity;
 import org.socialapp.model.Entity.PostEntity;
 import org.socialapp.model.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,12 @@ public class PostController {
         return postService.getPostsByUser(user);
     }
 
-    @GetMapping("/stats/{id}")
+    @GetMapping("/comments/{id}")
     public ResponseEntity<Map<String,Object>> getPostStats(@PathVariable("id") String id) {
         Map<String,Object> response = new HashMap<>();
         Optional<PostEntity> post = postService.getPostById(Long.parseLong(id));
-        int numberOfLikes = likeService.countLikesByPost(post.get());
-        int numberOfComments = commentService.countCommentsByPost(post.get());
-        response.put("numberOfLikes", numberOfLikes);
-        response.put("numberOfComments", numberOfComments);
+        List<CommentEntity> comments = commentService.getCommentsByPost(post.get());
+        response.put("comments", comments);
 
         return ResponseEntity.ok(response);
     }
