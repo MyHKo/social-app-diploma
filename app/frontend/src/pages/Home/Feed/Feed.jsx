@@ -5,7 +5,9 @@ import calculateTimeDifference from '@utils/calculateTimeDifference.js'
 import styles from './feed.module.scss'
 
 function Feed() {
-    const { posts}  = usePostStore()
+    const { posts, fetchData}  = usePostStore()
+
+    fetchData()
 
     return (
         <section className={styles.feed}>
