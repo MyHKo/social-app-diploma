@@ -71,7 +71,9 @@ const PostPage = () => {
                     <Comment text={comment.body} time={calculateTimeDifference(comment.created_at)}
                              user={comment.user.username} key={comment.id} />
                 )) :
-                    <h2>Oops.. so empty here</h2>
+                    <div className={styles.comment_placeholder}>
+                        <span>Oops.. so empty here</span>
+                    </div>
                 }
             </div>
         </div>
