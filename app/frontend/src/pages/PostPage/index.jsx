@@ -12,14 +12,28 @@ const PostPage = () => {
     const { posts } = usePostStore()
     const { id } = useParams()
     const [comments, setComments] = useState([])
+    const [post, setPost] = useState({})
 
-    let post = {}
-    for (let i = 0; i < posts.length; i++) {
-        if(posts[i].id === Number.parseInt(id)) {
-            post = {...posts[i]}
-            break
+    useEffect(() => {
+        const fetchPostStats = () => {
+            fetch(`http://localhost:8080/posts/stats/${id}`)
+                .then((res) => res.json())
+                .then(data => {setPost(data.post)})
+                .catch(err => console.log(err))
         }
-    }
+
+        if(posts && posts.length > 0) {
+            const foundPost = posts.find((post) => post.id === Number.parseInt(id))
+            if (foundPost) {
+                setPost(foundPost)
+            }
+            else {
+                fetchPostStats()
+            }
+        } else {
+            fetchPostStats()
+        }
+    }, [id, posts]);
 
     useEffect(() => {
         fetch(`http://localhost:8080/posts/comments/${id}`).
@@ -32,17 +46,18 @@ const PostPage = () => {
             })
         }).catch( error => {console.log("Error while fetching comments: ", error)})
 
-    }, []);
+    }, [id]);
 
     return (
         <div className={styles.container}>
             <div className={styles.post_container}>
-                <Post key={post.id} postId={post.id} user={`${post.user_id.username}`} text={post.body}
-                      time={calculateTimeDifference(post.created_at)}
-                      title={post.title}
-                      number_of_likes={post.numberOfLikes}
-                      number_of_comments={post.numberOfComments}
+                {post.id ? <Post key={post.id} postId={post.id} user={`${post.user_id.username}`} text={post.body}
+                       time={calculateTimeDifference(post.created_at)}
+                       title={post.title}
+                       number_of_likes={post.numberOfLikes}
+                       number_of_comments={post.numberOfComments}
                 />
+                    : "Loading"}
             </div>
 
             <div className={styles.commentBox}>
@@ -51,13 +66,16 @@ const PostPage = () => {
             </div>
 
             <div className={styles.comment_container}>
-                {comments.map((comment) => (
+                {comments.length > 0 ?
+                    comments.map((comment) => (
                     <Comment text={comment.body} time={calculateTimeDifference(comment.created_at)}
                              user={comment.user.username} key={comment.id} />
-                ))}
+                )) :
+                    <h2>Oops.. so empty here</h2>
+                }
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default PostPage;
+export default PostPage
