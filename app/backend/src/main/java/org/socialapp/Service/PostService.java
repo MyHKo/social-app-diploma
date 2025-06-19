@@ -53,4 +53,14 @@ public class PostService {
         }
         return topTen;
     }
+
+    public List<PostEntity> getTenNewestPostsByUser(UserEntity user) {
+        Pageable topTenPageable = PageRequest.of(0, 10);
+        List<PostEntity> topTen = postRepository.findAllByUserOrderByCreatedAtDesc(topTenPageable, user).getContent();
+        for (PostEntity post : topTen) {
+            post.setNumberOfComments(commentService.countCommentsByPost(post));
+            post.setNumberOfLikes(likeService.countLikesByPost(post));
+        }
+        return topTen;
+    }
 }

@@ -3,6 +3,7 @@ package org.socialapp.controller;
 import org.socialapp.Service.PostService;
 import org.socialapp.Service.SubscriptionService;
 import org.socialapp.Service.UserService;
+import org.socialapp.model.Entity.PostEntity;
 import org.socialapp.model.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +29,6 @@ public class UserController {
     @Autowired
     private PostService postService;
 
-    @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
     @GetMapping("/stats/{username}")
     public ResponseEntity<Map<String,Object>> getUserById(@PathVariable("username") String username) {
         Map<String,Object> response = new HashMap<>();
@@ -50,6 +46,18 @@ public class UserController {
         response.put("numberOfFollows", numberOfSubscribings);
         response.put("user", user.get());
 
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/posts/{username}")
+    public ResponseEntity<Map<String,Object>> getPostsByUsername(@PathVariable("username") String username) {
+        Map<String,Object> response = new HashMap<>();
+        Optional<UserEntity> user = userService.getUserByUsername(username);
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        List<PostEntity> posts = postService.getTenNewestPostsByUser(user.get());
+        response.put("posts", posts);
         return ResponseEntity.ok(response);
     }
 }

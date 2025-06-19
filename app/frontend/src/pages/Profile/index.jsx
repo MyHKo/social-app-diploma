@@ -18,12 +18,12 @@ function Profile() {
     }, []);
 
     return(
-        <div className={styles.profile_container}>
+        <section className={styles.profile_container}>
             <div className={styles.profile_info_container}>
                 { userStats ?
                     <span><ProfileHeader username={username} name={userStats.user.name} surname={userStats.user.surname}/>
                     <Stats posts={userStats.numberOfPosts}
-                likes={userStats.numberOfLikes}
+                following={userStats.numberOfFollows}
                 followers={userStats.numberOfFollowers}/>
                     </span>
                     :
@@ -32,7 +32,7 @@ function Profile() {
             </div>
 
             <UserPosts username={username} />
-        </div>
+        </section>
     )
 }
 

@@ -17,6 +17,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
     List<PostEntity> findAllByUser(UserEntity user);
     Optional<PostEntity> findById(@NonNull Long id);
     Page<PostEntity> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    Page<PostEntity> findAllByUserOrderByCreatedAtDesc(Pageable pageable, UserEntity user);
     int countAllByUser(UserEntity user);
 
 }

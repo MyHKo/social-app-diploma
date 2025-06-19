@@ -31,7 +31,7 @@ public class TokenFilter extends OncePerRequestFilter {
 
         AntPathMatcher pathMatcher = new AntPathMatcher();
         List<String> publicEndpoints = List.of("/auth/login", "/posts/get-newest", "/posts/comments/*", "/posts/stats/*",
-                "/users/stats/*");
+                "/users/stats/*", "/users/posts/*");
 
         for (String pattern : publicEndpoints) {
             if (pathMatcher.match(pattern, request.getRequestURI())) {

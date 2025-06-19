@@ -1,16 +1,40 @@
 import Post from '@components/Post/index.jsx'
 import PropTypes from 'prop-types'
+import {useEffect, useState} from 'react'
+import {LoaderCircle} from 'lucide-react'
 import styles from './userposts.module.scss'
+import calculateTimeDifference from "@utils/calculateTimeDifference.js";
 
 function UserPosts({ username }) {
+    const [posts, setPosts] = useState()
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/users/posts/${username}`)
+            .then((res) => res.json())
+            .then((data) => {setPosts(data.posts)})
+            .catch(err => console.log("Error while fetching user posts: ", err))
+    }, []);
+
     return (
-        <div className={styles.posts_section}>
-            <h3 className={styles.posts_title}>Recent Posts</h3>
-            <div className={styles.posts_list}>
-                {[1, 2, 3].map((id) => (
-                    <Post key={id} user={"@user"} title={"My first post"} text={"This is my first post. Loving this platform"} time={"2"}/>
-                ))}
-            </div>
+        <div className={styles.section}>
+            <h3 className={styles.title}>Recent Posts</h3>
+            {posts ?
+                <div className={styles.list}>
+                    {posts.map((post) => (
+                        <li className={styles.post_container} key={post.id}>
+                            <Post key={post.id} postId={post.id} user={`${post.user_id.username}`} text={post.body}
+                                  time={calculateTimeDifference(post.created_at)}
+                                  title={post.title}
+                                  number_of_likes={post.numberOfLikes}
+                                  number_of_comments={post.numberOfComments}
+                            />
+                        </li>
+                    ))}
+                </div>
+                :
+                <LoaderCircle className={styles.loading}/>
+            }
+
         </div>
     )
 }
