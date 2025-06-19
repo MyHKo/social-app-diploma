@@ -12,6 +12,10 @@ public interface SubscriptionRepository extends JpaRepository<SubscriptionEntity
 
     List<SubscriptionEntity> findAllBySubscriber(UserEntity subscriber);
 
+    int countAllBySubscribee(UserEntity subscribee);
+
     List<SubscriptionEntity> findAllBySubscribee(UserEntity subscribee);
+
+    int countAllBySubscriber(UserEntity subscriber);
 
 }

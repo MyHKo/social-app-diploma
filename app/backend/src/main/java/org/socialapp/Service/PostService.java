@@ -28,6 +28,10 @@ public class PostService {
         return postRepository.findAllByUser(user);
     }
 
+    public int countPostsByUser(UserEntity user) {
+        return postRepository.countAllByUser(user);
+    }
+
     public Optional<PostEntity> getPostById(Long id) {
         return postRepository.findById(id);
     }

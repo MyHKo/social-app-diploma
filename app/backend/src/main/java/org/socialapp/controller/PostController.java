@@ -35,13 +35,6 @@ public class PostController {
     @Autowired
     private LikeService likeService;
 
-    @GetMapping("/{id}")
-    public List<PostEntity> getPostsByUser_id(@PathVariable String id) {
-        System.out.println(id);
-        UserEntity user = userService.getUserByUsername(id);
-        return postService.getPostsByUser(user);
-    }
-
     @GetMapping("/comments/{id}")
     public ResponseEntity<Map<String,Object>> getPostComments(@PathVariable("id") String id) {
         Map<String,Object> response = new HashMap<>();

@@ -22,6 +22,15 @@ public class SubscriptionService {
         return subscriptionRepository.findAllBySubscriber(user);
     }
 
+    public int countSubscribers(UserEntity user) {
+        return subscriptionRepository.countAllBySubscribee(user);
+    }
+
+    public int countSubscribings(UserEntity user) {
+        return subscriptionRepository.countAllBySubscriber(user);
+    }
+
+
     public SubscriptionEntity createPost(SubscriptionEntity post) {
         return subscriptionRepository.save(post);
     }
