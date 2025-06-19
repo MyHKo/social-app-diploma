@@ -78,7 +78,7 @@ const PostPage = () => {
                         ?
                             comments.map((comment) => (
                                 <Comment text={comment.body} time={calculateTimeDifference(comment.created_at)}
-                                 user={comment.user.username} key={comment.id} />
+                                         username={comment.user.username} key={comment.id} />
                             ))
                         :
                             <div className={styles.comment_placeholder}>
