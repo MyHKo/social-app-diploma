@@ -13,6 +13,10 @@ function Post({ key, postId, user, title, number_of_comments, number_of_likes, t
         setIsLiked(!isLiked)
     }
 
+    const navigateToUserProfile = () => {
+        navigate(routes.profile(user))
+    }
+
     const navigateToPostPage = () => {
         navigate(routes.post(postId))
     }
@@ -20,7 +24,7 @@ function Post({ key, postId, user, title, number_of_comments, number_of_likes, t
     return (
         <div className={styles.post} key={key}>
             <div className={styles.post_header}>
-                <span className={styles.username}>@{user}</span>
+                <span className={styles.username} onClick={navigateToUserProfile}>@{user}</span>
                 <span className={styles.timestamp}>{time} ago</span>
             </div>
             <h2 className={styles.post_title} onClick={navigateToPostPage}>{title}</h2>

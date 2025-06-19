@@ -21,7 +21,7 @@ function Profile() {
         <div className={styles.profile_container}>
             <div className={styles.profile_info_container}>
                 { userStats ?
-                    <span><ProfileHeader username={username} name={userStats.name} surname={userStats.surname}/>
+                    <span><ProfileHeader username={username} name={userStats.user.name} surname={userStats.user.surname}/>
                     <Stats posts={userStats.numberOfPosts}
                 likes={userStats.numberOfLikes}
                 followers={userStats.numberOfFollowers}/>

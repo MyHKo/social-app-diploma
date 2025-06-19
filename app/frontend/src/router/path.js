@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
-    profile: '/profile',
+    profilePath: '/profile/:username',
+    profile: (username) => (`/profile/${username}`),
     login: '/login',
     post: (id) => (`/post/${id}`),
     postPath: 'post/:id'

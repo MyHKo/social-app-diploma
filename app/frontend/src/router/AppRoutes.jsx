@@ -9,7 +9,7 @@ function AppRoutes() {
     return (
         <Routes>
             <Route path={routes.home} element={<Home />} />
-            <Route path={routes.profile} element={<Profile />} />
+            <Route path={routes.profilePath} element={<Profile />} />
             <Route path={routes.login} element={<LogIn />} />
             <Route path={routes.postPath} element={<PostPage />} />
         </Routes>
