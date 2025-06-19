@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types'
+import Button from '@components/UiKit/Button/Button.jsx'
 import styles from './profileheader.module.scss'
-import PropTypes from "prop-types";
-import Button from "@components/UiKit/Button/Button.jsx";
 
 function ProfileHeader({ username, name, surname, avatar }) {
     return (

@@ -3,8 +3,8 @@ import Stats from '@pages/Profile/Stats/index.jsx'
 import UserPosts from '@pages/Profile/UserPosts/index.jsx'
 import {useParams} from 'react-router'
 import {useEffect, useState} from 'react'
+import {LoaderCircle} from 'lucide-react'
 import styles from './profile.module.scss'
-import {LoaderCircle} from "lucide-react";
 
 function Profile() {
     const { username } = useParams()

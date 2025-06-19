@@ -2,8 +2,8 @@ import Post from '@components/Post/index.jsx'
 import PropTypes from 'prop-types'
 import {useEffect, useState} from 'react'
 import {LoaderCircle} from 'lucide-react'
+import calculateTimeDifference from '@utils/calculateTimeDifference.js'
 import styles from './userposts.module.scss'
-import calculateTimeDifference from "@utils/calculateTimeDifference.js";
 
 function UserPosts({ username }) {
     const [posts, setPosts] = useState()
