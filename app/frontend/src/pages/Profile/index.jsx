@@ -4,10 +4,11 @@ import UserPosts from '@pages/Profile/UserPosts/index.jsx'
 import {useParams} from 'react-router'
 import {useEffect, useState} from 'react'
 import styles from './profile.module.scss'
+import {LoaderCircle} from "lucide-react";
 
 function Profile() {
     const { username } = useParams()
-    const [userStats, setUserStats] = useState({})
+    const [userStats, setUserStats] = useState()
 
     useEffect(() => {
         fetch(`http://localhost:8080/users/stats/${username}`)
@@ -19,14 +20,18 @@ function Profile() {
     return(
         <div className={styles.profile_container}>
             <div className={styles.profile_info_container}>
-                <ProfileHeader username={username} name={userStats.name} surname={userStats.surname} />
-
-                <Stats posts={userStats.numberOfPosts}
-                       likes={userStats.numberOfLikes}
-                       followers={userStats.numberOfFollowers}/>
+                { userStats ?
+                    <span><ProfileHeader username={username} name={userStats.name} surname={userStats.surname}/>
+                    <Stats posts={userStats.numberOfPosts}
+                likes={userStats.numberOfLikes}
+                followers={userStats.numberOfFollowers}/>
+                    </span>
+                    :
+                    <LoaderCircle className={styles.profile_loading}/>
+            }
             </div>
 
-            <UserPosts username={"username"} />
+            <UserPosts username={username} />
         </div>
     )
 }

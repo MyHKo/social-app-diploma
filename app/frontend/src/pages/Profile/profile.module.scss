@@ -1,3 +1,6 @@
+@use '/src/styles/animations';
+
+
 .profile_container {
   width: 100%;
   margin: 10px 0 0 0;
@@ -5,9 +8,16 @@
   box-sizing: border-box;
 }
 
-.profile_info_container{
+.profile_info_container {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 20px;
+}
+
+.profile_loading {
+    color: #4B0082;
+    width: 5rem;
+    height: 5rem;
+    animation: spin 1s linear infinite;
 }
