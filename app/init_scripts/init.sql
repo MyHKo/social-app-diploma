@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
+    bio VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
@@ -44,10 +45,10 @@ CREATE TABLE IF NOT EXISTS likes (
     CHECK (user_id <> post_id)
 );
 
-INSERT INTO users (name, surname, username, password) VALUES
-('Alice', 'Smith', 'alice_the_best', 'hashed_password_1'),
-('Bob', 'Johnson', 'bobius', 'hashed_password_2'),
-('Charlie', 'Brown', 'charlie22', 'hashed_password_3');
+INSERT INTO users (name, surname, username, bio, password) VALUES
+('Alice', 'Smith', 'alice_the_best', 'Lover of tech cats and coffee', 'hashed_password_1'),
+('Bob', 'Johnson', 'bobius', 'I eat mushrooms', 'hashed_password_2'),
+('Charlie', 'Brown', 'charlie22', '', 'hashed_password_3');
 
 
 INSERT INTO subscriptions (subscriber_id, subscribee_id, created_at) VALUES

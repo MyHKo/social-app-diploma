@@ -21,7 +21,8 @@ function Profile() {
         <section className={styles.profile_container}>
             <div className={styles.profile_info_container}>
                 { userStats ?
-                    <span><ProfileHeader username={username} name={userStats.user.name} surname={userStats.user.surname}/>
+                    <span><ProfileHeader username={username} name={userStats.user.name} surname={userStats.user.surname}
+                                         bio={userStats.user.bio}/>
                     <Stats posts={userStats.numberOfPosts}
                 following={userStats.numberOfFollows}
                 followers={userStats.numberOfFollowers}/>
