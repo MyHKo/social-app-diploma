@@ -1,6 +1,6 @@
 import Button from '@components/UiKit/Button/Button.jsx'
 import { useNavigate } from 'react-router'
-import routes from '/src/routes/path.js'
+import routes from '@routes/path.js'
 import styles from './header.module.scss'
 
 function Header() {

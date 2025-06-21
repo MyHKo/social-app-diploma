@@ -1,6 +1,6 @@
 import { User } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import routes from '/src/routes/path.js'
+import routes from '@routes/path.js'
 import styles from './sidebar.module.scss'
 
 function Sidebar() {

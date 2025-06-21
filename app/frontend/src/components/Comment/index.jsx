@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import {useNavigate} from 'react-router'
-import routes from '../../routes/path.js'
+import routes from '@routes/path.js'
 import styles from './comment.module.scss'
 
 const Comment = ({ key, username, text, time }) => {
