@@ -1,13 +1,13 @@
-@use '/src/styles/mixins';
+@use '/src/styles/auth_mixins';
 
 form {
-  @include mixins.auth_form;
+  @include auth_mixins.auth_form;
 
   input {
-    @include mixins.auth_input;
+    @include auth_mixins.auth_input;
   }
 }
 
 .registerLink {
-  @include mixins.auth_link;
+  @include auth_mixins.auth_link;
 }
