@@ -1,9 +1,9 @@
 @use '/src/styles/auth_mixins';
 
 form {
-  @include auth_mixins.auth_form;
+  @include auth_mixins.form;
 }
 
 .registerLink {
-  @include auth_mixins.auth_link;
+  @include auth_mixins.link;
 }

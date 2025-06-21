@@ -1,9 +1,46 @@
 @use '/src/styles/auth_mixins';
 
 .form {
-  @include auth_mixins.auth_form
+  @include auth_mixins.form
 }
 
 .log_in_link {
-  @include auth_mixins.auth_link
+  @include auth_mixins.link
+}
+
+.error_message {
+  @include auth_mixins.error
+}
+
+.input_wrapper {
+  list-style: none;
+  position: relative;
+}
+
+.create_password {
+  &:focus ~ .password_banner {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.password_banner {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #f0f4ff;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 0.875rem;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(5px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }

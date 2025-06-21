@@ -1,9 +1,9 @@
 @use '/src/styles/auth_mixins';
 
 .sign_up_container {
-  @include auth_mixins.auth_page_container
+  @include auth_mixins.page_container
 }
 
 .sign_up_box {
-  @include auth_mixins.auth_box
+  @include auth_mixins.box
 }
