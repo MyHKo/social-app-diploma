@@ -1,5 +1,5 @@
 import Header from '@components/Header/Header.jsx'
-import AppRoutes from './router/AppRoutes.jsx'
+import AppRoutes from './routes/AppRoutes.jsx'
 import styles from './app.module.scss'
 
 function App() {

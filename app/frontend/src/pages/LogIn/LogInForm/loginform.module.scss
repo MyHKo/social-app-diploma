@@ -2,10 +2,6 @@
 
 form {
   @include auth_mixins.auth_form;
-
-  input {
-    @include auth_mixins.auth_input;
-  }
 }
 
 .registerLink {

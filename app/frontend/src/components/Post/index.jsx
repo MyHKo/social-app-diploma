@@ -2,7 +2,7 @@ import {Heart, MessageCircle} from 'lucide-react'
 import PropTypes from 'prop-types'
 import {useState} from 'react'
 import {useNavigate} from 'react-router'
-import routes from '../../router/path.js'
+import routes from '../../routes/path.js'
 import styles from './post.module.scss'
 
 function Post({ key, postId, user, title, number_of_comments, number_of_likes, text, time }) {
