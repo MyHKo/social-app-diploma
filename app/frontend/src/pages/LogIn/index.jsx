@@ -5,8 +5,8 @@ function LogIn() {
     return (
         <div className={styles.loginContainer}>
             <div className={styles.loginBox}>
-                <h1>
-                    Social<span>Sphere</span>
+                <h1 className={styles.title}>
+                    Social<span className={styles.title_second_part}>Sphere</span>
                 </h1>
                 <LogInForm />
             </div>

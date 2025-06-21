@@ -1,31 +1,19 @@
+@use '/src/styles/mixins';
+
 .loginContainer {
-  background-color: var(--background);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 1rem;
+  @include mixins.auth_page_container;
 }
 
 .loginBox {
-  background: #fff;
-  padding: 2.5rem 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
+  @include mixins.auth_box;
 
-  h1 {
+  .title {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #222;
 
-    span {
+    .title_second_part {
       color: var(--main-color);
     }
   }
 }
-
-
-
