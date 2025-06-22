@@ -12,10 +12,10 @@ function SignUpForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors}
+        formState: { errors, isValid}
     } = useForm({
         resolver: zodResolver(schema()),
-        mode: 'onBlur',
+        mode: 'onChange',
         defaultValues: {
             name: '',
             surname: '',
@@ -25,9 +25,22 @@ function SignUpForm() {
         }
     })
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        console.log(e.target.name)
+    const onSubmit = (data) => {
+        fetch("http://localhost:8080/auth/signup", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then((res) => {
+                if(res.ok) {
+                    console.log(res)
+                }
+            })
+            .catch((err) => {
+                console.log("An error when registering a user: ", err)
+            })
     }
 
     return (
@@ -80,7 +93,7 @@ function SignUpForm() {
                 <span className={styles.error_message}>{errors.confirmPassword?.message}</span>
             </li>
 
-            <Button text={"Sign Up"}/>
+            <Button text={"Sign Up"} disabled={!isValid} type="submit"/>
             <p className={styles.log_in_link} onClick={() => {
                 navigate(routes.login)
             }}>

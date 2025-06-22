@@ -26,7 +26,7 @@ public class UserEntity {
 
     @Column(nullable = false)
     @NotBlank(message = "Username cannot be empty")
-    @Pattern(regexp = "^[A-Za-z0-9_]{3,10}$\n",
+    @Pattern(regexp = "^[A-Za-z0-9_]{3,10}$",
             message = "Username contains illegal characters")
     private String username;
     
@@ -35,13 +35,13 @@ public class UserEntity {
 
     @Column(nullable = false)
     @NotBlank(message = "Password cannot be empty")
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$\n",
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$",
             message = "Password does not meet the requirements")
     private String password;
 
     public UserEntity() {}
 
-    public UserEntity(String name, String surname, String bio, String username, String password) {
+    public UserEntity(String name, String surname,String username, String bio, String password) {
         this.name = name;
         this.surname = surname;
         this.username = username;
