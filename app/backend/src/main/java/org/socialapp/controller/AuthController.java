@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,6 +39,12 @@ public class AuthController {
         }
         if(!req.getPassword().matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$")){
             return ResponseEntity.badRequest().body("Password does not meet the requirements");
+        }
+
+        Optional<UserEntity> checkUsername = userService.getUserByUsername(req.getUsername());
+
+        if (checkUsername.isPresent()) {
+            return ResponseEntity.badRequest().body("Username is already taken");
         }
 
         String hashedPassword = passwordEncoder.encode(req.getPassword());

@@ -12,6 +12,7 @@ function SignUpForm() {
     const {
         register,
         handleSubmit,
+        setError,
         formState: { errors, isValid}
     } = useForm({
         resolver: zodResolver(schema()),
@@ -35,7 +36,17 @@ function SignUpForm() {
         })
             .then((res) => {
                 if(res.ok) {
-                    console.log(res)
+                    navigate(routes.login)
+                } else {
+                    return res.text()
+                }
+            })
+            .then((text) => {
+                if(text.includes("Username is already taken")) {
+                    setError("username", {
+                        type: "manual",
+                        message: "Username is already taken"
+                    })
                 }
             })
             .catch((err) => {
