@@ -2,7 +2,7 @@ package org.socialapp.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class UserDTO {
+public class UserRegistrationDTO {
     @NotBlank
     private String name;
     @NotBlank
@@ -14,9 +14,9 @@ public class UserDTO {
     @NotBlank
     private String confirmPassword;
 
-    public UserDTO() {}
+    public UserRegistrationDTO() {}
 
-    public UserDTO(String name, String surname, String username, String password, String confirmPassword) {
+    public UserRegistrationDTO(String name, String surname, String username, String password, String confirmPassword) {
         this.name = name;
         this.surname = surname;
         this.username = username;

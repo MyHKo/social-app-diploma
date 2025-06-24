@@ -7,3 +7,12 @@ form {
 .registerLink {
   @include auth_mixins.link;
 }
+
+.error_message {
+  @include auth_mixins.error;
+}
+
+.input_wrapper {
+  list-style: none;
+  position: relative;
+}
