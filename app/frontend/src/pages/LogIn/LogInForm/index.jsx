@@ -1,13 +1,15 @@
 import Button from '@components/UiKit/Button/Button.jsx'
 import {useNavigate} from 'react-router'
 import routes from '@routes/path.js'
+import {useForm} from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import schema from './schema.js'
+import {useAuthStore} from '@stores/AuthStore.js'
 import styles from './loginform.module.scss'
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import schema from "./schema.js";
 
 function LoginForm() {
     const navigate = useNavigate()
+    const { setIsLoggedIn, setPublicKey } = useAuthStore()
 
     const onsubmit = (data) => {
         fetch("http://localhost:8080/auth/login", {
@@ -38,8 +40,8 @@ function LoginForm() {
                         });
                     }
                 } else {
-                    // ✅ result is an object with publicKey
-                    console.log("Login successful, public key:", result.publicKey);
+                    setIsLoggedIn(true)
+                    setPublicKey(result.publicKey)
                 }
             })
             .catch((err) => {
