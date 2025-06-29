@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JWTUtil {
@@ -24,6 +25,7 @@ public class JWTUtil {
     public String createToken(String username) {
         return Jwts.builder()
                 .subject(username)
+                .claim("roles", List.of("ROLE_USER"))
                 .issuedAt(new Date())
                 .expiration(new Date(new Date().getTime() + expiration))
                 .signWith(privateKey, Jwts.SIG.RS256)

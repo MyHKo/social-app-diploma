@@ -18,6 +18,9 @@ const useAuthStore = create((set) => {
             fetch("http://localhost:8080/auth/logout", {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                }
             })
             set({username: ""})
             set({publicKey: ""})

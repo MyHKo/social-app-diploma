@@ -2,6 +2,7 @@ package org.socialapp.Security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.socialapp.Service.CustomUserDetailsService;
@@ -42,22 +43,22 @@ public class TokenFilter extends OncePerRequestFilter {
             }
         }
 
-        final String authHeader = request.getHeader("Authorization");
-
-        if (authHeader == null) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
-        }
-
-        String username = null;
+        Cookie[] cookies = request.getCookies();
         String jwt = null;
 
-        if (authHeader.startsWith("Bearer ")) {
-            jwt = authHeader.substring(7);
-            username = jwtUtil.getUsername(jwt);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    jwt = cookie.getValue();
+                    break;
+                }
+            }
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+
+        if (jwt != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            String username = jwtUtil.getUsername(jwt);
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
             if (jwtUtil.validateToken(jwt)) {
