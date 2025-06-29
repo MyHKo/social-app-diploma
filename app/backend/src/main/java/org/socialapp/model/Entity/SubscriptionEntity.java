@@ -25,16 +25,19 @@ public class SubscriptionEntity {
     private UserEntity subscribee;
 
     @Column(nullable = false)
-    @NotBlank(message = "Date cannot be empty")
     private OffsetDateTime created_at;
 
 
     public SubscriptionEntity() {}
 
-    public SubscriptionEntity(UserEntity subscriber, UserEntity subscribee, OffsetDateTime created_at) {
+    public SubscriptionEntity(UserEntity subscriber, UserEntity subscribee) {
         this.subscriber = subscriber;
         this.subscribee = subscribee;
-        this.created_at = created_at;
+        this.id = new SubscriptionId(subscriber.getId(), subscribee.getId());
+    }
+
+    public SubscriptionId getId() {
+        return id;
     }
 
     public UserEntity getSubscriber() { return subscriber; }

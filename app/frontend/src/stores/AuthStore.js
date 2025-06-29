@@ -1,6 +1,8 @@
 import { create } from 'zustand'
+import {createJSONStorage, persist} from 'zustand/middleware'
 
-const useAuthStore = create((set) => {
+const useAuthStore = create(
+    persist((set) => {
     return {
         isLoggedIn: false,
         publicKey: "",
@@ -27,6 +29,12 @@ const useAuthStore = create((set) => {
             set({isLoggedIn: false})
         }
     }
-});
+    },
+        {
+            name: 'LogIn',
+            storage: createJSONStorage(() => sessionStorage)
+        }
+        )
+);
 
 export { useAuthStore };

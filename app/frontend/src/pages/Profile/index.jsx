@@ -24,7 +24,7 @@ function Profile() {
         <section className={styles.profile_container}>
             <div className={styles.profile_info_container}>
                 { userStats ?
-                    <span><ProfileHeader username={parameterUsername} name={userStats.user.name} surname={userStats.user.surname}
+                    <span><ProfileHeader parameterUsername={parameterUsername} name={userStats.user.name} surname={userStats.user.surname}
                                          bio={userStats.user.bio}
                                          isSameUser={isLoggedIn && username === parameterUsername}/>
                     <Stats posts={userStats.numberOfPosts}

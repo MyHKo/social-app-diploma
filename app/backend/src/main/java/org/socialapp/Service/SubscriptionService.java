@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubscriptionService {
 
     @Autowired
     private SubscriptionRepository subscriptionRepository;
+
+    public Optional<SubscriptionEntity> findByUsers(UserEntity subscriber, UserEntity subscribee) {
+        return subscriptionRepository.findBySubscribeeAndSubscriber(subscribee, subscriber);
+    }
 
     public List<SubscriptionEntity> getAllSubscribers(UserEntity user) {
         return subscriptionRepository.findAllBySubscribee(user);
@@ -31,11 +36,11 @@ public class SubscriptionService {
     }
 
 
-    public SubscriptionEntity createPost(SubscriptionEntity post) {
-        return subscriptionRepository.save(post);
+    public SubscriptionEntity createSubscription(SubscriptionEntity subscription) {
+        return subscriptionRepository.save(subscription);
     }
 
-    public void deletePost(SubscriptionEntity post) {
-        subscriptionRepository.delete(post);
+    public void deleteSubscription(SubscriptionEntity subscription) {
+        subscriptionRepository.delete(subscription);
     }
 }
