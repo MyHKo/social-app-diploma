@@ -1,6 +1,6 @@
 const routes = {
     home: '/',
-    profilePath: '/profile/:username',
+    profilePath: '/profile/:parameterUsername',
     profile: (username) => (`/profile/${username}`),
     login: '/login',
     signup: '/signup',

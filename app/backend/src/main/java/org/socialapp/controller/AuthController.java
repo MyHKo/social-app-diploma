@@ -11,10 +11,7 @@ import org.socialapp.model.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.PublicKey;
 import java.util.HashMap;
@@ -88,7 +85,19 @@ public class AuthController {
 
         Map<String,Object> responseMap = new HashMap<>();
         responseMap.put("publicKey", publicKey.toString());
+        responseMap.put("username", req.getUsername());
 
         return ResponseEntity.ok(responseMap);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response){
+        Cookie cookie = new Cookie("token", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return ResponseEntity.ok().build();
     }
 }

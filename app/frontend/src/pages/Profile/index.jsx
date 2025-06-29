@@ -5,13 +5,16 @@ import {useParams} from 'react-router'
 import {useEffect, useState} from 'react'
 import {LoaderCircle} from 'lucide-react'
 import styles from './profile.module.scss'
+import {useAuthStore} from "@stores/AuthStore.js";
 
 function Profile() {
-    const { username } = useParams()
+    const { parameterUsername } = useParams()
+    const { username, isLoggedIn } = useAuthStore()
     const [userStats, setUserStats] = useState()
 
+
     useEffect(() => {
-        fetch(`http://localhost:8080/users/stats/${username}`)
+        fetch(`http://localhost:8080/users/stats/${parameterUsername}`)
             .then((data) => data.json())
             .then((data) => {setUserStats(data)})
             .catch(err => console.log("Error when fetching user data: ", err))
@@ -21,8 +24,9 @@ function Profile() {
         <section className={styles.profile_container}>
             <div className={styles.profile_info_container}>
                 { userStats ?
-                    <span><ProfileHeader username={username} name={userStats.user.name} surname={userStats.user.surname}
-                                         bio={userStats.user.bio}/>
+                    <span><ProfileHeader username={parameterUsername} name={userStats.user.name} surname={userStats.user.surname}
+                                         bio={userStats.user.bio}
+                                         isSameUser={isLoggedIn && username === parameterUsername}/>
                     <Stats posts={userStats.numberOfPosts}
                 following={userStats.numberOfFollows}
                 followers={userStats.numberOfFollowers}/>
@@ -32,7 +36,7 @@ function Profile() {
             }
             </div>
 
-            <UserPosts username={username} />
+            <UserPosts username={parameterUsername} />
         </section>
     )
 }

@@ -9,11 +9,12 @@ import styles from './loginform.module.scss'
 
 function LoginForm() {
     const navigate = useNavigate()
-    const { setIsLoggedIn, setPublicKey } = useAuthStore()
+    const { setIsLoggedIn, setPublicKey, setUsername } = useAuthStore()
 
     const onsubmit = (data) => {
         fetch("http://localhost:8080/auth/login", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -42,6 +43,8 @@ function LoginForm() {
                 } else {
                     setIsLoggedIn(true)
                     setPublicKey(result.publicKey)
+                    setUsername(result.username)
+                    navigate("/")
                 }
             })
             .catch((err) => {

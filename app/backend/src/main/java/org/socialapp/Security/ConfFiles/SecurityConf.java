@@ -4,7 +4,6 @@ import org.socialapp.Security.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,6 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConf {
 
     private final TokenFilter tokenFilter;
+
+    private final CorsConf corsConf = new CorsConf();
 
     public SecurityConf(TokenFilter tokenFilter) {
         this.tokenFilter = tokenFilter;
@@ -28,15 +29,22 @@ public class SecurityConf {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable()).authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/posts/get-newest", "/posts/stats/*", "/posts/comments/*",
+                .cors(cors -> cors.configurationSource(corsConf.corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(
+                                "/posts/get-newest", "/posts/stats/*", "/posts/comments/*",
                                 "/auth/login", "/auth/signup",
-                                "/users/stats/*", "/users/posts/*").permitAll()
-                        .requestMatchers("/posts/add-post", "/posts/delete-post").hasRole("USER")
-                        .anyRequest().authenticated())
+                                "/users/stats/*", "/users/posts/*"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/posts/add-post", "/posts/delete-post", "/auth/logout"
+                        ).hasRole("USER")
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         return http.build();
     }
 }

@@ -6,7 +6,7 @@ import styles from './header.module.scss'
 
 function Header() {
     const navigate = useNavigate()
-    const { isLoggedIn, setIsLoggedIn } = useAuthStore()
+    const { isLoggedIn, logOut } = useAuthStore()
 
     return (
         <header className={styles.header}>
@@ -15,9 +15,9 @@ function Header() {
             </h1>
             <div className={styles.loginButtonWrapper}>
                 {isLoggedIn
-                    ? <Button text={"Log In"} onClick={() => {navigate(routes.login)}}/>
-                    : <Button text={"Log Out"} style={styles.logOutButton}
-                              onClick={() => {console.log("user was logged out")}}/>}
+                    ? <Button text={"Log Out"} style={styles.logOutButton}
+                              onClick={() => {logOut()}}/>
+                    : <Button text={"Log In"} onClick={() => {navigate(routes.login)}}/>}
             </div>
         </header>
     );
