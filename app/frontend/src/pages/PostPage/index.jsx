@@ -7,14 +7,37 @@ import { useParams } from 'react-router'
 import { usePostStore } from '@stores/PostStore.js'
 import { LoaderCircle } from 'lucide-react'
 import calculateTimeDifference from '@utils/calculateTimeDifference.js'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
+import { useAuthStore } from '@stores/AuthStore.js'
 import styles from './postPage.module.scss'
 
 const PostPage = () => {
+    const { isLoggedIn, username } = useAuthStore()
     const { posts } = usePostStore()
     const { id } = useParams()
+    const commentRef = useRef(null)
     const [comments, setComments] = useState([])
     const [post, setPost] = useState({})
+
+    const handleCommentPost = () => {
+        const text = commentRef.current.value.replace(/<[^>]*>?/gm, '')
+        fetch("http://localhost:8080/posts/comments/create", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                postId: Number.parseInt(id),
+                text: text
+            }),
+        }).then(() => {
+            window.location.reload()
+        }).catch((e) => {
+            console.log("Error while creating a comment: ", e)
+        })
+    }
 
     useEffect(() => {
         const fetchPostStats = () => {
@@ -68,12 +91,14 @@ const PostPage = () => {
                     }
                 </div>
 
-                <div className={styles.commentBox}>
-                <Textarea placeholder={"Write Your comment"} value={""} />
-                <Button text={"Post Comment"} />
-                </div>
+                { isLoggedIn
+                    ? <div className={styles.comment_creator}>
+                        <Textarea placeholder={"Write Your comment"} ref={commentRef}/>
+                        <Button text={"Post Comment"} onClick={handleCommentPost}/>
+                    </div>
+                    : ""}
 
-                <ul className={styles.comment_container}>
+                <ul className={styles.comments_container}>
                         {comments.length > 0
                         ?
                             comments.map((comment) => (

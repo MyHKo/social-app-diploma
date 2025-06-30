@@ -26,17 +26,15 @@ public class CommentEntity {
     @NotBlank(message = "body cannot be empty")
     private String body;
 
-    @Column(name = "created_at", nullable = false)
-    @NotBlank(message = "Date cannot be empty")
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private OffsetDateTime createdAt;
 
     public CommentEntity() {}
 
-    public CommentEntity(UserEntity user, PostEntity post, String body, OffsetDateTime created_at) {
+    public CommentEntity(UserEntity user, PostEntity post, String body) {
         this.user = user;
         this.post = post;
         this.body = body;
-        this.createdAt = created_at;
     }
 
     public Long getId() { return id; }

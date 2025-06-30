@@ -29,16 +29,17 @@
     animation: spin 1s linear infinite;
 }
 
-.commentBox {
+.comment_creator {
   width: 100%;
-  margin: 1rem 0 1rem 0;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.comment_container {
+.comments_container {
   width: 100%;
+  margin-top: 1rem;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

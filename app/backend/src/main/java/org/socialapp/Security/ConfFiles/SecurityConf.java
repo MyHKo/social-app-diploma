@@ -38,7 +38,8 @@ public class SecurityConf {
                                 "/users/stats/*", "/users/posts/*"
                         ).permitAll()
                         .requestMatchers(
-                                "/posts/create", "/posts/delete-post", "/auth/logout",
+                                "/posts/create", "/posts/comments/create", "/posts/delete-post",
+                                "/auth/logout",
                                 "/users/follow", "/users/isfollowing", "/users/unfollow"
                         ).hasRole("USER")
                         .anyRequest().authenticated()

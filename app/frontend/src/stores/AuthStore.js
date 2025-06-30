@@ -23,6 +23,10 @@ const useAuthStore = create(
                 headers: {
                     "Content-Type": "application/json",
                 }
+            }).then(() => {
+                window.location.reload()
+            }).catch((e) => {
+                console.log("Error while loging out: ", e)
             })
             set({username: ""})
             set({publicKey: ""})

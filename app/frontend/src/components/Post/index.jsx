@@ -37,7 +37,7 @@ function Post({ key, postId, user, title, number_of_comments, number_of_likes, t
                     <span className={styles.number_of_interactions}>{number_of_likes}</span>
                 </div>
 
-                <div className={styles.comment_icon_container}>
+                <div className={styles.comment_icon_container} onClick={navigateToPostPage}>
                     <MessageCircle className={styles.comment_icon}/>
                     <span className={styles.number_of_interactions}>{number_of_comments}</span>
                 </div>

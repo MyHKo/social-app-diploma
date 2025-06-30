@@ -1,5 +1,6 @@
 package org.socialapp.controller;
 
+import org.socialapp.DTO.CommentDTO;
 import org.socialapp.DTO.PostDTO;
 import org.socialapp.Service.CommentService;
 import org.socialapp.Service.LikeService;
@@ -72,6 +73,23 @@ public class PostController {
         PostEntity post = new PostEntity(user.get(), req.getTitle(), req.getText());
         postService.createPost(post);
 
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/comments/create")
+    public ResponseEntity<?> createComment(@RequestBody CommentDTO req) {
+        Optional<UserEntity> user = userService.getUserByUsername(req.getUsername());
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<PostEntity> post = postService.getPostById(req.getPostId());
+        if(post.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        CommentEntity comment = new CommentEntity(user.get(), post.get(), req.getText());
+        commentService.createComment(comment);
         return ResponseEntity.ok().build();
     }
 }
