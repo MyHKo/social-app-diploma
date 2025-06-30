@@ -2,11 +2,13 @@ import PostCreator from '@components/PostCreator/PostCreator.jsx'
 import Post from '@components/Post/index.jsx'
 import {usePostStore} from '@stores/PostStore.js'
 import calculateTimeDifference from '@utils/calculateTimeDifference.js'
+import {useEffect} from 'react'
+import {useAuthStore} from '@stores/AuthStore.js'
 import styles from './feed.module.scss'
-import {useEffect} from "react";
 
 function Feed() {
     const { posts, fetchData}  = usePostStore()
+    const { isLoggedIn } = useAuthStore()
 
     useEffect(() => {
         fetchData(posts)
@@ -14,9 +16,9 @@ function Feed() {
 
     return (
         <section className={styles.feed}>
-            <div className={styles.post_creator_container}>
-                <PostCreator />
-            </div>
+            {isLoggedIn
+                ?<div className={styles.post_creator_container}> <PostCreator/> </div>
+                : ""}
 
             <ul className={styles.post_list}>
             {posts.map((post) => (

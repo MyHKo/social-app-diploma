@@ -1,5 +1,6 @@
 package org.socialapp.controller;
 
+import org.socialapp.DTO.PostDTO;
 import org.socialapp.Service.CommentService;
 import org.socialapp.Service.LikeService;
 import org.socialapp.Service.PostService;
@@ -9,10 +10,7 @@ import org.socialapp.model.Entity.PostEntity;
 import org.socialapp.model.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,5 +60,18 @@ public class PostController {
     @GetMapping("/get-newest")
     public List<PostEntity> getNewestPosts() {
         return postService.getTenNewestPosts();
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createPost(@RequestBody PostDTO req) {
+        Optional<UserEntity> user = userService.getUserByUsername(req.getUsername());
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        PostEntity post = new PostEntity(user.get(), req.getTitle(), req.getText());
+        postService.createPost(post);
+
+        return ResponseEntity.ok().build();
     }
 }

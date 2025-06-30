@@ -1,13 +1,10 @@
+import { forwardRef } from 'react'
 import styles from './textarea.module.scss'
-import PropTypes from 'prop-types'
 
- function Textarea({ value, placeholder }) {
-    return <textarea className={styles.textarea} value={value} placeholder={placeholder} />;
-}
+ const Textarea = forwardRef((props, ref) => {
+    return <textarea className={styles.textarea} ref={ref} {...props} />;
+})
+
+Textarea.displayName = 'Textarea'
 
 export default Textarea
-
-Textarea.propTypes = {
-    value: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired
-}

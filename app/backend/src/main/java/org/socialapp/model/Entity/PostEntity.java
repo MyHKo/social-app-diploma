@@ -27,7 +27,6 @@ public class PostEntity {
     private String body;
 
     @Column(name = "created_at", nullable = false)
-    @NotBlank(message = "Date cannot be empty")
     private OffsetDateTime createdAt;
 
     @Transient
@@ -39,11 +38,10 @@ public class PostEntity {
 
     public PostEntity() {}
 
-    public PostEntity(UserEntity user, String title, String body, OffsetDateTime created_at) {
+    public PostEntity(UserEntity user, String title, String body) {
         this.user = user;
         this.title = title;
         this.body = body;
-        this.createdAt = created_at;
     }
 
     public Long getId() { return id; }

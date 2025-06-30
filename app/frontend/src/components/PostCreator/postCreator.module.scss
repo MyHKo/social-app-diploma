@@ -3,3 +3,22 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.title_input {
+  width: 100%;
+  min-height: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--disabled);
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+
+
+  &:focus {
+    border-color: var(--main-color-blue);
+    outline: none;
+  }
+}
