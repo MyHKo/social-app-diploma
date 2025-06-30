@@ -26,7 +26,7 @@ public class PostEntity {
     @NotBlank(message = "Body cannot be empty")
     private String body;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private OffsetDateTime createdAt;
 
     @Transient
