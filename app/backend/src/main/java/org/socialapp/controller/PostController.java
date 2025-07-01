@@ -32,6 +32,8 @@ public class PostController {
 
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private LikeService likeService;
 
     @GetMapping("/comments/{id}")
     public ResponseEntity<Map<String,Object>> getPostComments(@PathVariable("id") String id) {
@@ -48,13 +50,15 @@ public class PostController {
         Map<String,Object> response = new HashMap<>();
         Optional<PostEntity> optionalPost = postService.getPostById(Long.parseLong(id));
         
-        if(optionalPost.isPresent()) {
-            response.put("post", optionalPost.get());
-            return ResponseEntity.ok(response);
-        }
-        else {
+        if(optionalPost.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+
+        PostEntity post = optionalPost.get();
+        post.setNumberOfLikes(likeService.countLikesByPost(post));
+        post.setNumberOfComments(commentService.countCommentsByPost(post));
+        response.put("post", post);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/get-newest")

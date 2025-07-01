@@ -21,6 +21,7 @@ const PostPage = () => {
 
     const handleCommentPost = () => {
         const text = commentRef.current.value.replace(/<[^>]*>?/gm, '')
+        commentRef.current.value = ''
         fetch("http://localhost:8080/posts/comments/create", {
             method: "POST",
             credentials: "include",
@@ -37,9 +38,7 @@ const PostPage = () => {
                 return res.json()
             }
         }).then((obj) => {
-            setPost((prevState) => {
-                return {comments: obj.comments, ...prevState}
-            })
+            setComments(obj)
         }).catch((e) => {
             console.log("Error while creating a comment: ", e)
         })
@@ -64,7 +63,7 @@ const PostPage = () => {
         } else {
             fetchPostStats()
         }
-    }, [id, posts]);
+    }, []);
 
     useEffect(() => {
         fetch(`http://localhost:8080/posts/comments/${id}`).
@@ -77,7 +76,7 @@ const PostPage = () => {
             })
         }).catch( error => {console.log("Error while fetching comments: ", error)})
 
-    }, [id]);
+    }, []);
 
     return (
         <div className={styles.container}>
