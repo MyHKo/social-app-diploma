@@ -1,12 +1,14 @@
 package org.socialapp.controller;
 
 import org.socialapp.DTO.CommentDTO;
+import org.socialapp.DTO.LikeDTO;
 import org.socialapp.DTO.PostDTO;
 import org.socialapp.Service.CommentService;
 import org.socialapp.Service.LikeService;
 import org.socialapp.Service.PostService;
 import org.socialapp.Service.UserService;
 import org.socialapp.model.Entity.CommentEntity;
+import org.socialapp.model.Entity.LikeEntity;
 import org.socialapp.model.Entity.PostEntity;
 import org.socialapp.model.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,6 @@ public class PostController {
 
     @Autowired
     private CommentService commentService;
-
-    @Autowired
-    private LikeService likeService;
 
     @GetMapping("/comments/{id}")
     public ResponseEntity<Map<String,Object>> getPostComments(@PathVariable("id") String id) {
@@ -80,16 +79,16 @@ public class PostController {
     public ResponseEntity<?> createComment(@RequestBody CommentDTO req) {
         Optional<UserEntity> user = userService.getUserByUsername(req.getUsername());
         if(user.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("User not found");
         }
 
         Optional<PostEntity> post = postService.getPostById(req.getPostId());
         if(post.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("Post not found");
         }
 
         CommentEntity comment = new CommentEntity(user.get(), post.get(), req.getText());
         commentService.createComment(comment);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(commentService.getCommentsByPost(post.get()));
     }
 }

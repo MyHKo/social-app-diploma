@@ -32,8 +32,14 @@ const PostPage = () => {
                 postId: Number.parseInt(id),
                 text: text
             }),
-        }).then(() => {
-            window.location.reload()
+        }).then((res) => {
+            if(res.ok){
+                return res.json()
+            }
+        }).then((obj) => {
+            setPost((prevState) => {
+                return {comments: obj.comments, ...prevState}
+            })
         }).catch((e) => {
             console.log("Error while creating a comment: ", e)
         })

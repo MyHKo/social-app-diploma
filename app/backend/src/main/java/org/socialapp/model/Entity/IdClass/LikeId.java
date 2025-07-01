@@ -7,22 +7,22 @@ import java.util.Objects;
 
 @Embeddable
 public class LikeId implements Serializable {
-    private Integer userId;
+    private Long userId;
 
-    private Integer postId;
+    private Long postId;
 
     public LikeId() {}
 
-    public LikeId(Integer userId, Integer PostId) {
+    public LikeId(Long userId, Long PostId) {
         this.userId = userId;
         this.postId = PostId;
     }
 
-    public Integer getUserId() { return userId; }
-    public void setUserId(Integer userId) { this.userId = userId; }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public Integer getPostId() { return postId; }
-    public void setPostId(Integer PostId) { this.postId = PostId; }
+    public Long getPostId() { return postId; }
+    public void setPostId(Long PostId) { this.postId = PostId; }
 
     @Override
     public boolean equals(Object o) {

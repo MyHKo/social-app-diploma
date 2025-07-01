@@ -22,7 +22,7 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser }) {
                         subscribee: parameterUsername
                     })
                 }).then(() => {
-                    window.location.reload();
+                    setIsFollowing(false)
                 })
                     .catch((e) => {
                         console.log("Error while following a user: ", e)
@@ -39,7 +39,7 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser }) {
                         subscribee: parameterUsername
                     })
                 }).then(() => {
-                    window.location.reload()
+                    setIsFollowing(false)
                 })
                     .catch((e) => {
                         console.log("Error while unfollowing a user: ", e)

@@ -26,6 +26,11 @@ public class LikeEntity {
     public LikeEntity(UserEntity user, PostEntity post) {
         this.user = user;
         this.post = post;
+        this.id = new LikeId(user.getId(), post.getId());
+    }
+
+    public LikeId getId() {
+        return id;
     }
 
     public UserEntity getUser() { return user; }
