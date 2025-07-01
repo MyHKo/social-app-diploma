@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types'
 import Button from '@components/UiKit/Button/Button.jsx'
 import {useAuthStore} from '@stores/AuthStore.js'
+import {useEffect, useState} from 'react'
+import {useNavigate} from 'react-router'
+import routes from '@routes/path.js'
 import styles from './profileheader.module.scss'
-import {useEffect, useState} from "react";
 
-function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser }) {
+function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser, setUserStats}) {
     const { isLoggedIn, username } = useAuthStore()
     const [isFollowing, setIsFollowing] = useState(false)
+    const navigate = useNavigate()
 
     const handleFollowClick = () => {
         if(isLoggedIn && !isSameUser){
-            if(!isFollowing) {
-                fetch('http://localhost:8080/users/follow', {
+                fetch(`http://localhost:8080/users/${isFollowing ? "unfollow" : "follow"}`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -21,30 +23,20 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser }) {
                         subscriber: username,
                         subscribee: parameterUsername
                     })
-                }).then(() => {
-                    setIsFollowing(false)
-                })
-                    .catch((e) => {
+                }).then((res) => {
+                    if(res.ok){
+                        return res.json()
+                    }
+                }).then((data) => {
+                    setIsFollowing(prevState => !prevState)
+                    setUserStats((prevState) => {
+                        return { ...prevState, numberOfFollowers: data}
+                    })
+                }).catch((e) => {
                         console.log("Error while following a user: ", e)
                     })
-            } else {
-                fetch('http://localhost:8080/users/unfollow', {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        subscriber: username,
-                        subscribee: parameterUsername
-                    })
-                }).then(() => {
-                    setIsFollowing(false)
-                })
-                    .catch((e) => {
-                        console.log("Error while unfollowing a user: ", e)
-                    })
-            }
+        } else {
+            navigate(routes.login)
         }
     }
 
@@ -66,7 +58,7 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser }) {
                 }
             }).catch((e) => {console.log("Unexpected error ", e)})
         }
-    })
+    }, [])
 
     return (
         <div className={styles.header}>
@@ -93,4 +85,5 @@ ProfileHeader.propTypes = {
     bio: PropTypes.string.isRequired,
     avatar: PropTypes.string,
     isSameUser: PropTypes.bool.isRequired,
+    setUserStats: PropTypes.func.isRequired
 }

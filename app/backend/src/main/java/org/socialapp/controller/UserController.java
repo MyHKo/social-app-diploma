@@ -65,13 +65,18 @@ public class UserController {
     public ResponseEntity<?> followUser(@RequestBody FollowDTO body) {
         Optional<UserEntity> subscriber = userService.getUserByUsername(body.getSubscriber());
         Optional<UserEntity> subscribee = userService.getUserByUsername(body.getSubscribee());
-        System.out.println("REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG");
-        System.out.println(subscriber.get().getId());
-        System.out.println(subscribee.get().getId());
-        System.out.println("REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG REQUEST LOG");
         SubscriptionEntity subscription = new SubscriptionEntity(subscriber.get(), subscribee.get());
         subscriptionService.createSubscription(subscription);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(subscriptionService.countSubscribers(subscribee.get()));
+    }
+
+    @PostMapping("/unfollow")
+    public ResponseEntity<?> unFollowUser(@RequestBody FollowDTO body) {
+        Optional<UserEntity> subscriber = userService.getUserByUsername(body.getSubscriber());
+        Optional<UserEntity> subscribee = userService.getUserByUsername(body.getSubscribee());
+        SubscriptionEntity subscription = new SubscriptionEntity(subscriber.get(), subscribee.get());
+        subscriptionService.deleteSubscription(subscription);
+        return ResponseEntity.ok(subscriptionService.countSubscribers(subscribee.get()));
     }
 
     @PostMapping("/isfollowing")
@@ -84,15 +89,6 @@ public class UserController {
         } else {
             return ResponseEntity.ok().body(true);
         }
-    }
-
-    @PostMapping("/unfollow")
-    public ResponseEntity<?> unFollowUser(@RequestBody FollowDTO body) {
-        Optional<UserEntity> subscriber = userService.getUserByUsername(body.getSubscriber());
-        Optional<UserEntity> subscribee = userService.getUserByUsername(body.getSubscribee());
-        SubscriptionEntity subscription = new SubscriptionEntity(subscriber.get(), subscribee.get());
-        subscriptionService.deleteSubscription(subscription);
-        return ResponseEntity.ok().build();
     }
 
 }

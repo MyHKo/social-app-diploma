@@ -26,7 +26,8 @@ function Profile() {
                 { userStats ?
                     <span><ProfileHeader parameterUsername={parameterUsername} name={userStats.user.name} surname={userStats.user.surname}
                                          bio={userStats.user.bio}
-                                         isSameUser={isLoggedIn && username === parameterUsername}/>
+                                         isSameUser={isLoggedIn && username === parameterUsername}
+                                         setUserStats={setUserStats}/>
                     <Stats posts={userStats.numberOfPosts}
                 following={userStats.numberOfFollows}
                 followers={userStats.numberOfFollowers}/>
