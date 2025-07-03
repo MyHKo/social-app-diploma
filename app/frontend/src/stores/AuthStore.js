@@ -7,6 +7,7 @@ const useAuthStore = create(
         isLoggedIn: false,
         publicKey: "",
         username: "",
+        accessToken: "",
         setIsLoggedIn: (value) => {
             set({isLoggedIn: value})
         },
@@ -15,6 +16,9 @@ const useAuthStore = create(
         },
         setUsername: (value) => {
             set({username: value})
+        },
+        setAccessToken: (value) => {
+            set({authToken: value})
         },
         logOut: () => {
             fetch("http://localhost:8080/auth/logout", {

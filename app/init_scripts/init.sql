@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS users (
     surname VARCHAR(50) NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
     bio VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    token TEXT UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS subscriptions (

@@ -11,8 +11,11 @@ import java.util.List;
 @Component
 public class JWTUtil {
 
-    @Value("${jwt.expiration}")
-    private Long expiration;
+    @Value("${jwt.expiration.access}")
+    private Long expiration_access;
+
+    @Value("${jwt.expiration.refresh}")
+    private Long expiration_refresh;
 
     private final PrivateKey privateKey;
     private final PublicKey publicKey;
@@ -22,7 +25,13 @@ public class JWTUtil {
         this.publicKey = publicKey;
     }
 
-    public String createToken(String username) {
+    public String createToken(String username, String type) {
+        Long expiration;
+        if(type.equals("access"))
+            expiration = expiration_access;
+        else
+            expiration = expiration_refresh;
+
         return Jwts.builder()
                 .subject(username)
                 .claim("roles", List.of("ROLE_USER"))

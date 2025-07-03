@@ -7,20 +7,19 @@ import {useAuthStore} from '@stores/AuthStore.js'
 import styles from './post.module.scss'
 
 function Post({ key, postId, user, title, number_of_comments, number_of_likes, text, time }) {
-    const { isLoggedIn, username } = useAuthStore()
+    const { isLoggedIn, username, accessToken } = useAuthStore()
     const [isLiked, setIsLiked] = useState(false)
     const [ownNumberOfLikes, setOwnNumberOfLikes] = useState(number_of_likes)
     const navigate = useNavigate()
 
     const toggleHeart = () => {
         if(isLoggedIn) {
-            if(!isLiked){
-                setIsLiked(true)
-                fetch('http://localhost:8080/likes/create', {
+                setIsLiked((prevState) => !prevState)
+                fetch(`http://localhost:8080/likes/${isLiked ? 'delete' : 'create'}`, {
                     method: "POST",
-                    credentials: "include",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${accessToken}`
                     },
                     body: JSON.stringify({
                         username: username,
@@ -35,28 +34,6 @@ function Post({ key, postId, user, title, number_of_comments, number_of_likes, t
                 }).catch((e) => {
                     console.log("Error while liking: ", e)
                 })
-            } else {
-                setIsLiked(false)
-                fetch('http://localhost:8080/likes/delete', {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        postId: Number.parseInt(postId)
-                    })
-                }).then((res) => {
-                    if(res.ok){
-                        return res.json()
-                    }
-                }).then((data) => {
-                    setOwnNumberOfLikes(data)
-                }).catch((e) => {
-                    console.log("Error while liking: ", e)
-                })
-            }
         }
         else {
             navigate(routes.login)
@@ -75,9 +52,9 @@ function Post({ key, postId, user, title, number_of_comments, number_of_likes, t
         if(isLoggedIn) {
             fetch("http://localhost:8080/likes/isliking", {
                 method: "POST",
-                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`
                 },
                 body: JSON.stringify({
                     username: username,

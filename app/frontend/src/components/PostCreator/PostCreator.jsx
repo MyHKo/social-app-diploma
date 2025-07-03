@@ -5,7 +5,7 @@ import {useAuthStore} from '@stores/AuthStore.js'
 import styles from './postCreator.module.scss';
 
 function PostCreator() {
-    const { username } = useAuthStore()
+    const { username, accessToken } = useAuthStore()
     const ref = useRef(null)
     const titleRef = useRef(null)
 
@@ -14,9 +14,9 @@ function PostCreator() {
         const text = ref.current.value.replace(/<[^>]*>?/gm, '')
         fetch("http://localhost:8080/posts/create", {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`
             },
             body: JSON.stringify({
                 username: username,

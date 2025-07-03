@@ -9,7 +9,7 @@ import styles from './loginform.module.scss'
 
 function LoginForm() {
     const navigate = useNavigate()
-    const { setIsLoggedIn, setPublicKey, setUsername } = useAuthStore()
+    const { setIsLoggedIn, setPublicKey, setUsername, setAccessToken } = useAuthStore()
 
     const onsubmit = (data) => {
         fetch("http://localhost:8080/auth/login", {
@@ -44,6 +44,7 @@ function LoginForm() {
                     setIsLoggedIn(true)
                     setPublicKey(result.publicKey)
                     setUsername(result.username)
+                    setAccessToken(result.accessToken)
                     navigate("/")
                 }
             })

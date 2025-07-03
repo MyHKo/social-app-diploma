@@ -28,7 +28,8 @@ services:
       DB_USER: ${DATABASE_USER}
       DB_PASSWORD: ${DATABASE_PASSWORD}
       KEYSTORE_PASSWORD: ${KEYSTORE_PASSWORD}
-      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      JWT_REFRESH: ${JWT_REFRESH}
+      JWT_ACCESS: ${JWT_ACCESS}
     volumes:
       - social-app-keys:/keystore
     ports: 

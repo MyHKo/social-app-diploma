@@ -7,7 +7,7 @@ import routes from '@routes/path.js'
 import styles from './profileheader.module.scss'
 
 function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser, setUserStats}) {
-    const { isLoggedIn, username } = useAuthStore()
+    const { isLoggedIn, username, accessToken } = useAuthStore()
     const [isFollowing, setIsFollowing] = useState(false)
     const navigate = useNavigate()
 
@@ -15,9 +15,9 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser, setU
         if(isLoggedIn && !isSameUser){
                 fetch(`http://localhost:8080/users/${isFollowing ? "unfollow" : "follow"}`, {
                     method: 'POST',
-                    credentials: 'include',
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": `Bearer ${accessToken}`
                     },
                     body: JSON.stringify({
                         subscriber: username,
@@ -44,9 +44,9 @@ function ProfileHeader({ parameterUsername, name, surname, bio, isSameUser, setU
         if(isLoggedIn && !isSameUser){
             fetch('http://localhost:8080/users/isfollowing', {
                 method: 'POST',
-                credentials: 'include',
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`
                 },
                 body: JSON.stringify({
                     subscriber: username,

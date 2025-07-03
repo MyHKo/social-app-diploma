@@ -39,6 +39,9 @@ public class UserEntity {
             message = "Password does not meet the requirements")
     private String password;
 
+    @Column
+    private String token;
+
     public UserEntity() {}
 
     public UserEntity(String name, String surname,String username, String bio, String password) {
@@ -65,4 +68,11 @@ public class UserEntity {
     public void setPassword(String password) { this.password = password; }
 
     public Long getId() { return id; }
+
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

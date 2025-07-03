@@ -12,7 +12,7 @@ import { useAuthStore } from '@stores/AuthStore.js'
 import styles from './postPage.module.scss'
 
 const PostPage = () => {
-    const { isLoggedIn, username } = useAuthStore()
+    const { isLoggedIn, username, accessToken } = useAuthStore()
     const { posts } = usePostStore()
     const { id } = useParams()
     const commentRef = useRef(null)
@@ -24,9 +24,9 @@ const PostPage = () => {
         commentRef.current.value = ''
         fetch("http://localhost:8080/posts/comments/create", {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`
             },
             body: JSON.stringify({
                 username: username,

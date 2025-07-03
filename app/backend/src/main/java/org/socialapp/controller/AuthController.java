@@ -60,22 +60,27 @@ public class AuthController {
         String hashedPassword = passwordEncoder.encode(req.getPassword());
 
         UserEntity user = new UserEntity(req.getName(), req.getSurname(), req.getUsername(), "", hashedPassword);
-        userService.createUser(user);
+        userService.saveUser(user);
 
         return ResponseEntity.ok().body("User registered successfully");
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody UserLogInDTO req, HttpServletResponse response){
-        Optional<UserEntity> checkUsername = userService.getUserByUsername(req.getUsername());
-        if(checkUsername.isEmpty()){
+        Optional<UserEntity> user = userService.getUserByUsername(req.getUsername());
+        if(user.isEmpty()){
             return ResponseEntity.badRequest().body("Username not found");
         }
-        if(!passwordEncoder.matches(req.getPassword(), checkUsername.get().getPassword())){
+        if(!passwordEncoder.matches(req.getPassword(), user.get().getPassword())){
             return ResponseEntity.badRequest().body("Incorrect password");
         }
 
-        Cookie cookie = new Cookie("token", jwtUtil.createToken(req.getUsername()));
+        UserEntity userEntity = user.get();
+        String refreshToken = jwtUtil.createToken(req.getUsername(), "refresh");
+        userEntity.setToken(refreshToken);
+        userService.saveUser(userEntity);
+
+        Cookie cookie = new Cookie("refresh_token", refreshToken);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
         cookie.setPath("/");
@@ -86,6 +91,7 @@ public class AuthController {
         Map<String,Object> responseMap = new HashMap<>();
         responseMap.put("publicKey", publicKey.toString());
         responseMap.put("username", req.getUsername());
+        responseMap.put("accessToken", jwtUtil.createToken(req.getUsername(), "access"));
 
         return ResponseEntity.ok(responseMap);
     }

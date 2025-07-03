@@ -22,8 +22,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public UserEntity createUser(UserEntity user) {
-        return userRepository.save(user);
+    public void saveUser(UserEntity user) {
+        userRepository.save(user);
     }
 
     public void deleteUser(UserEntity User) {
