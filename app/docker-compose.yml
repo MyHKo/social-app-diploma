@@ -31,7 +31,21 @@ services:
       JWT_REFRESH: ${JWT_REFRESH}
       JWT_ACCESS: ${JWT_ACCESS}
     volumes:
-      - social-app-keys:/keystore
+      - ./keys:/keystore
+    entrypoint:
+    - /bin/sh
+    - -c
+    - >
+      if [ ! -f /keystore/keystore.jks ]; then
+        echo 'Creating keystore.jks...' &&
+        keytool -genkeypair \
+          -alias jwtKey \
+          -keyalg RSA \
+          -keystore /keystore/keystore.jks \
+          -storepass "$KEYSTORE_PASSWORD" \
+          -dname 'CN=example.com, OU=IT, O=Company, L=City, ST=State, C=US';
+      fi &&
+      mvn spring-boot:run	
     ports: 
       - "8080:8080"
     depends_on:
